@@ -1,7 +1,3 @@
-This refined pre-planning document consolidates your architecture, requirements, and technical stack into a single, cohesive English specification.
-
----
-
 # 🏗️ Project Pre-Planning: Industrial Monitoring System
 
 ## Project Overview
