@@ -1,0 +1,1 @@
+This document aims to explain my line of thought throughout the planning, development and testing of the project. The steps, methods, tools and strategies chosen for the project full lifecycle.
