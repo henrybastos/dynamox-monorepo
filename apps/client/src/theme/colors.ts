@@ -1,8 +1,3 @@
-export const brand = {
-  deepPlum: '#692746',          // Deep Plum
-  industrialAmber: '#ECB340',   // Industrial Amber
-}
-
 export const white = {
   100: '#FFFFFF',
   200: '#FAFCFE',
@@ -13,7 +8,6 @@ export const white = {
 
 export const gray = {
   100: '#E0E5F2',
-  200: '#cfd4e0ff',
   500: '#A3AED0',
   900: '#707EAE',
 };

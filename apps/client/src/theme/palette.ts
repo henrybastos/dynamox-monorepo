@@ -1,5 +1,5 @@
 import { PaletteColorOptions, PaletteOptions } from '@mui/material/styles';
-import { brand, gray, red, green, blue, yellow, skyblue, purple, indigo, white } from './colors';
+import { gray, red, green, blue, yellow, skyblue, purple, indigo, white } from './colors';
 
 declare module '@mui/material/styles' {
   interface PaletteOptions {
@@ -41,17 +41,17 @@ declare module '@mui/material/styles' {
 const palette: PaletteOptions = {
   neutral: {
     light: gray[100],
-    main: indigo[500],
+    main: gray[500],
     dark: gray[900],
   },
   primary: {
     light: purple[300],
-    main: brand.deepPlum,
+    main: purple[500],
   },
   secondary: {
-    light: '#E4bA66',
-    main: brand.industrialAmber,
-    dark: '#C29E55',
+    light: skyblue[300],
+    main: skyblue[500],
+    dark: indigo[300],
   },
   info: {
     lighter: white[100],
@@ -75,8 +75,8 @@ const palette: PaletteOptions = {
   },
   text: {
     primary: indigo[500],
-    secondary: gray[500],
-    disabled: gray[200],
+    secondary: gray[900],
+    disabled: gray[500],
   },
   gradients: {
     primary: {

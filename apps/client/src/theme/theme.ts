@@ -4,43 +4,43 @@ import type {} from '@mui/x-date-pickers/themeAugmentation';
 import palette from './palette';
 import typography from './typography';
 import customShadows from './shadows';
-import CssBaseline from '@ui/utils/css-baseline';
-import Stack from '@ui/layout/stack';
-import Paper from '@ui/surfaces/paper';
-import Button from '@ui/buttons/button';
-import ButtonBase from '@ui/buttons/button-base';
-import IconButton from '@ui/buttons/icon-button';
-import Toolbar from '@ui/buttons/toolbar';
-import Chip from '@ui/data-display/chip';
-import Badge from '@ui/data-display/badge';
-import Checkbox from '@ui/inputs/checkbox';
-import FilledInput from '@ui/inputs/filled-input';
-import FormControlLabel from '@ui/inputs/form-control-label';
-import InputAdornment from '@ui/inputs/input-adornment';
-import InputBase from '@ui/inputs/input-base';
-import OutlinedInput from '@ui/inputs/outlined-input';
-import Select from '@ui/inputs/select';
-import Collapse from '@ui/list/collapse';
-import List from '@ui/list/list';
-import ListItemButton from '@ui/list/list-item-button';
-import ListItemIcon from '@ui/list/list-item-icon';
-import ListItemText from '@ui/list/list-item-text';
-import MenuItem from '@ui/list/menu-item';
-import AppBar from '@ui/navigation/app-bar';
-import Drawer from '@ui/navigation/drawer';
-import Link from '@ui/navigation/link';
-import YearCalendar from '@ui/date-picker/year-calendar';
-import MonthCalendar from '@ui/date-picker/month-calendar';
-import PaginationItem from '@ui/pagination/pagination-item';
-import DataGrid from '@ui/data-grid/data-grid';
-import Avatar from '@ui/data-display/avatar';
-import AvatarGroup from '@ui/data-display/avatar-group';
-import Card from '@ui/cards/card';
-import CardMedia from '@ui/cards/card-media';
-import CardContent from '@ui/cards/card-content';
-import DateCalendar from '@ui/date-picker/date-calendar';
-import InputLabel from '@ui/inputs/input-label';
-import Divider from '@ui/data-display/divider';
+import CssBaseline from './components/utils/CssBaseline';
+import Stack from './components/layout/Stack';
+import Paper from './components/surfaces/Paper';
+import Button from './components/buttons/Button';
+import ButtonBase from './components/buttons/ButtonBase';
+import IconButton from './components/buttons/IconButton';
+import Toolbar from './components/buttons/Toolbar';
+import Chip from './components/data-display/Chip';
+import Badge from './components/data-display/Badge';
+import Checkbox from './components/inputs/Checkbox';
+import FilledInput from './components/inputs/FilledInput';
+import FormControlLabel from './components/inputs/FormControlLabel';
+import InputAdornment from './components/inputs/InputAdornment';
+import InputBase from './components/inputs/InputBase';
+import OutlinedInput from './components/inputs/OutlinedInput';
+import Select from './components/inputs/Select';
+import Collapse from './components/list/Collapse';
+import List from './components/list/List';
+import ListItemButton from './components/list/ListItemButton';
+import ListItemIcon from './components/list/ListItemIcon';
+import ListItemText from './components/list/ListItemText';
+import MenuItem from './components/list/MenuItem';
+import AppBar from './components/navigation/AppBar';
+import Drawer from './components/navigation/Drawer';
+import Link from './components/navigation/Link';
+import YearCalendar from './components/date-picker/YearCalendar';
+import MonthCalendar from './components/date-picker/MonthCalendar';
+import PaginationItem from './components/pagination/PaginationItem';
+import DataGrid from './components/data-grid/DataGrid';
+import Avatar from './components/data-display/Avatar';
+import AvatarGroup from './components/data-display/AvatarGroup';
+import Card from './components/cards/Card';
+import CardMedia from './components/cards/CardMedia';
+import CardContent from './components/cards/CardContent';
+import DateCalendar from './components/date-picker/DateCalendar';
+import InputLabel from './components/inputs/InputLabel';
+import Divider from './components/data-display/Divider';
 
 export const theme = createTheme({
   palette,
@@ -59,9 +59,6 @@ export const theme = createTheme({
       lg: 1420,
       xl: 1780,
     },
-  },
-  shape: {
-    borderRadius: 2,
   },
   components: {
     MuiStack: Stack,

@@ -1,7 +1,7 @@
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 
 export const fontFamily = {
-  Inter: ["Inter", "system-ui", "-apple-system", 'sans-serif'].join(','),
+  Inter: ['Inter', 'sans-serif'].join(','),
   Poppins: ['Poppins', 'sans-serif'].join(','),
 };
 
