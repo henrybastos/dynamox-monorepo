@@ -9,8 +9,8 @@ import {
   Typography, 
   Divider, 
   IconButton, 
-  ListItem, 
-  ListItemButton, 
+  ListItem,  
+  ListItemButton,
   ListItemIcon, 
   ListItemText,
   Avatar,
@@ -26,6 +26,7 @@ import {
 } from '@mui/icons-material';
 import { useRouter, usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
+// import ListItemButton from '@ui/list/list-item-button';
 
 const DRAWER_WIDTH = 260;
 
@@ -53,6 +54,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <Typography variant="h6" fontWeight="bold" color="primary">Dynamox</Typography>
         </Box>
       </Toolbar>
+
       <Divider sx={{ mx: 2, mb: 2 }} />
       <List sx={{ px: 2, flexGrow: 1 }}>
         {menuItems.map((item) => {
@@ -74,7 +76,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 <ListItemIcon sx={{ color: 'inherit', minWidth: 40 }}>
                   {item.icon}
                 </ListItemIcon>
-                <ListItemText primary={item.text} primaryTypographyProps={{ fontWeight: isActive ? 600 : 500 }} />
+                <ListItemText sx={{ color: isActive ? 'white' : 'text.secondary' }} primary={item.text} primaryTypographyProps={{ fontWeight: isActive ? 600 : 500 }} />
               </ListItemButton>
             </ListItem>
           );
@@ -142,6 +144,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </Box>
         </Toolbar>
       </AppBar>
+      
       <Box
         component="nav"
         sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}

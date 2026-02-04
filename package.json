@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "start:client": "npx nx serve client",
     "prisma:push": "npx prisma db push",
     "prisma:generate": "npx prisma generate",
     "prisma:seed": "npx prisma db seed"
@@ -13,9 +14,11 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@hookform/resolvers": "^5.2.2",
+    "@iconify/react": "^6.0.2",
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
     "@mui/x-data-grid": "^5.16.7",
+    "@mui/x-date-pickers": "^7.15.0",
     "@nestjs/common": "^11.0.0",
     "@nestjs/core": "^11.0.0",
     "@nestjs/jwt": "^11.0.2",
@@ -42,6 +45,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.71.1",
     "react-redux": "^9.2.0",
+    "react-router-dom": "^7.13.0",
     "recharts": "^3.7.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",

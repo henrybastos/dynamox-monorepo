@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@source/persistence": ["libs/shared/persistence/src/index.ts"]
+      "@source/persistence": ["libs/shared/persistence/src/index.ts"],
+      "@ui/*": ["apps/client/src/theme/ui/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
