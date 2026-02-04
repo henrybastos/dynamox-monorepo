@@ -2,8 +2,6 @@ import 'dotenv/config';
 import { PrismaClient } from '../../persistence/prisma/generated/main/client'
 import Redis from 'ioredis';
 import * as amqp from 'amqplib';
-
-// Prisma Client
 import { PrismaPg } from '@prisma/adapter-pg';
 
 const adapter = new PrismaPg({ 

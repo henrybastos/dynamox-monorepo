@@ -46,3 +46,7 @@ Thumbs.db
 
 # enviroment variables
 .env
+
+# Next.js
+.next
+out

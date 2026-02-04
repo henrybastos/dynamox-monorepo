@@ -24,6 +24,15 @@ export class MonitoringPointsService {
     });
   }
 
+  async findOne(id: number) {
+    const point = await prisma.monitoringPoint.findUnique({
+      where: { id },
+      include: { machine: true, sensor: true },
+    });
+    if (!point) throw new NotFoundException('Monitoring point not found');
+    return point;
+  }
+
   async associateSensor(pointId: number, sensorData: { id: string; model: SensorModel }) {
     const point = await prisma.monitoringPoint.findUnique({
       where: { id: pointId },

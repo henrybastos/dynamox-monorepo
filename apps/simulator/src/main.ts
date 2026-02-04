@@ -10,7 +10,7 @@ async function simulate() {
 
     await channel.assertQueue(QUEUE, { durable: true });
 
-    const sensors = ['sensor_1', 'sensor_2', 'sensor_3'];
+    const sensors = ['sensor_hf_01', 'sensor_tcag_01'];
 
     console.log('Simulator started. Sending data every 2 seconds...');
 

@@ -1,8 +1,7 @@
-version: '3.8'
-
+name: dynamox-container
 services:
   postgres:
-    image: postgres:15
+    image: postgres:17
     container_name: dynamox-postgres
     environment:
       POSTGRES_USER: admin
@@ -14,13 +13,13 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   redis:
-    image: redis:7
+    image: redis:8
     container_name: dynamox-redis
     ports:
       - "6379:6379"
 
   rabbitmq:
-    image: rabbitmq:3-management
+    image: rabbitmq:4-management
     container_name: dynamox-rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: admin

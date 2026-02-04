@@ -27,6 +27,11 @@ export class MonitoringPointsController {
     return this.mpService.create(body);
   }
 
+  @Get(':id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.mpService.findOne(id);
+  }
+
   @Post(':id/sensors')
   async associateSensor(
     @Param('id', ParseIntPipe) id: number,
