@@ -1,6 +1,9 @@
-import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { signIn, useSession } from 'next-auth/react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -15,16 +18,26 @@ import Checkbox from '@mui/material/Checkbox';
 import IconifyIcon from 'components/base/IconifyIcon';
 import paths from 'routes/paths';
 
-interface User {
-  [key: string]: string;
-}
+const signInSchema = z.object({
+  email: z.email('Invalid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+});
+
+type SignInFormData = z.infer<typeof signInSchema>;
 
 const SignInView = () => {
   const { status } = useSession();
   const navigate = useNavigate();
-  const [user, setUser] = useState<User>({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SignInFormData>({
+    resolver: zodResolver(signInSchema),
+  });
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -32,18 +45,13 @@ const SignInView = () => {
     }
   }, [status, navigate]);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async (data: SignInFormData) => {
     setError(null);
 
     const result = await signIn('credentials', {
       redirect: false,
-      email: user.email,
-      password: user.password,
+      email: data.email,
+      password: data.password,
     });
 
     if (result?.error) {
@@ -111,44 +119,36 @@ const SignInView = () => {
 
         <Divider sx={{ my: 3 }}>or</Divider>
 
-        <Box component="form" onSubmit={handleSubmit}>
+        <Box component="form" onSubmit={handleSubmit(onSubmit)}>
           <TextField
             id="email"
-            name="email"
             type="email"
             label="Email"
-            value={user.email}
-            onChange={handleInputChange}
             variant="filled"
             placeholder="mail@example.com"
             autoComplete="email"
-            sx={{ mt: 3 }}
             fullWidth
             autoFocus
-            required
+            {...register('email')}
+            error={!!errors.email}
+            helperText={errors.email?.message}
+            sx={{ mt: 3 }}
           />
           <TextField
             id="password"
-            name="password"
             label="Password"
             type={showPassword ? 'text' : 'password'}
-            value={user.password}
-            onChange={handleInputChange}
             variant="filled"
             placeholder="Min. 8 characters"
             autoComplete="current-password"
-            sx={{ mt: 6 }}
             fullWidth
-            required
+            {...register('password')}
+            error={!!errors.password}
+            helperText={errors.password?.message}
+            sx={{ mt: 6 }}
             InputProps={{
               endAdornment: (
-                <InputAdornment
-                  position="end"
-                  sx={{
-                    opacity: user.password ? 1 : 0,
-                    pointerEvents: user.password ? 'auto' : 'none',
-                  }}
-                >
+                <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
                     onClick={() => setShowPassword(!showPassword)}
@@ -176,8 +176,15 @@ const SignInView = () => {
             </Link>
           </Stack>
 
-          <Button type="submit" variant="contained" size="large" sx={{ mt: 3 }} fullWidth>
-            Sign In
+          <Button
+            type="submit"
+            variant="contained"
+            size="large"
+            disabled={isSubmitting}
+            sx={{ mt: 3 }}
+            fullWidth
+          >
+            {isSubmitting ? 'Signing In...' : 'Sign In'}
           </Button>
         </Box>
 
