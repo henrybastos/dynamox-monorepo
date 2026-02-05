@@ -43,7 +43,12 @@ const YourPiChart = () => {
         value: item.value,
         name: item.name,
         itemStyle: {
-          color: item.id === 1 ? theme.palette.primary.main : theme.palette.secondary.main,
+          color:
+            item.id === 1
+              ? theme.palette.primary.main
+              : item.id === 2
+                ? theme.palette.secondary.main
+                : theme.palette.warning.main,
         },
       }));
 
@@ -60,7 +65,7 @@ const YourPiChart = () => {
     <Paper sx={{ py: 2.5, height: 350 }}>
       <Stack alignItems="center" justifyContent="space-between">
         <Typography variant="body1" fontWeight={700}>
-          Your Pie Chart
+          Sensor Distribution
         </Typography>
 
         <FormControl
@@ -90,7 +95,7 @@ const YourPiChart = () => {
           <React.Fragment key={item.id}>
             <Stack
               component={ButtonBase}
-              width="50%"
+              width="33%"
               mt={0.75}
               spacing={0.75}
               alignItems="flex-start"
@@ -106,7 +111,9 @@ const YourPiChart = () => {
                   item.visible
                     ? item.id === 1
                       ? 'primary.main'
-                      : 'secondary.main'
+                      : item.id === 2
+                        ? 'secondary.main'
+                        : 'warning.main'
                     : 'neutral.light'
                 }
               />
@@ -119,7 +126,7 @@ const YourPiChart = () => {
                 </Typography>
               </Box>
             </Stack>
-            {item.id !== 2 && (
+            {item.id !== 3 && (
               <Divider sx={{ height: 50 }} orientation="vertical" variant="middle" flexItem />
             )}
           </React.Fragment>

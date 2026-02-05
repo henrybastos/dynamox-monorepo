@@ -6,6 +6,7 @@ export interface PiChartDataProps {
 }
 
 export const PiChartData: PiChartDataProps[] = [
-  { id: 1, value: 65, name: 'Your Files', visible: true },
-  { id: 2, value: 35, name: 'System', visible: true },
+  { id: 1, value: 45, name: 'TcAg', visible: true },
+  { id: 2, value: 30, name: 'TcAs', visible: true },
+  { id: 3, value: 25, name: 'HF+', visible: true },
 ];

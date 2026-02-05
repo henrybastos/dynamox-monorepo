@@ -8,7 +8,7 @@ const Button: Components<Omit<Theme, 'components'>>['MuiButton'] = {
   styleOverrides: {
     root: ({ theme }) => ({
       color: theme.palette.info.light,
-      borderRadius: theme.shape.borderRadius * 4,
+      borderRadius: theme.shape.borderRadius * 1,
       textTransform: 'initial',
     }),
     text: ({ theme }) => ({

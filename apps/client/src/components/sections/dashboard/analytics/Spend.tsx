@@ -14,14 +14,14 @@ const Spend = () => {
         bgcolor="info.main"
         borderRadius="50%"
       >
-        <IconifyIcon icon="ic:round-attach-money" fontSize="h2.fontSize" color="primary.main" />
+        <IconifyIcon icon="ic:round-settings" fontSize="h2.fontSize" color="primary.main" />
       </Stack>
       <div>
         <Typography variant="body2" color="text.disabled" noWrap>
-          Spend this month
+          Active Machines
         </Typography>
         <Typography mt={0.25} variant="h3">
-          $642.39
+          48
         </Typography>
       </div>
     </Stack>

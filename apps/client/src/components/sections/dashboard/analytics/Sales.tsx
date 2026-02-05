@@ -1,20 +1,30 @@
 import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import IconifyIcon from 'components/base/IconifyIcon';
 
 const Sales = () => {
   return (
-    <Paper sx={{ px: 2.5, py: 1.5, height: 100 }}>
-      <Typography variant="body2" color="text.disabled">
-        Sales
-      </Typography>
-      <Typography variant="h3">$574.34</Typography>
-      <Typography variant="caption" color="text.disabled" fontWeight={400}>
-        <Typography variant="body2" component="span" color="success.main" fontWeight={700}>
-          +23%
-        </Typography>{' '}
-        since last month
-      </Typography>
-    </Paper>
+    <Stack component={Paper} p={2.5} alignItems="center" spacing={2.25} height={100}>
+      <Stack
+        alignItems="center"
+        justifyContent="center"
+        height={56}
+        width={56}
+        bgcolor="info.main"
+        borderRadius="50%"
+      >
+        <IconifyIcon icon="ic:round-health-and-safety" fontSize="h2.fontSize" color="primary.main" />
+      </Stack>
+      <div>
+        <Typography variant="body2" color="text.disabled" noWrap>
+          Machine Health
+        </Typography>
+        <Typography mt={0.25} variant="h3">
+          94%
+        </Typography>
+      </div>
+    </Stack>
   );
 };
 

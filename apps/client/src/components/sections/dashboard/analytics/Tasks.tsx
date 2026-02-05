@@ -11,16 +11,14 @@ const Tasks = () => {
         justifyContent="center"
         height={56}
         width={56}
+        bgcolor="info.main"
         borderRadius="50%"
-        sx={(theme) => ({
-          background: `linear-gradient(90deg, ${theme.palette.gradients.secondary.main} 0%, ${theme.palette.gradients.secondary.state} 100%)`,
-        })}
       >
-        <IconifyIcon icon="ic:baseline-add-task" fontSize="h3.fontSize" color="info.lighter" />
+        <IconifyIcon icon="ic:round-location-on" fontSize="h2.fontSize" color="primary.main" />
       </Stack>
       <div>
         <Typography variant="body2" color="text.disabled" noWrap>
-          New Tasks
+          Monitoring Points
         </Typography>
         <Typography mt={0.25} variant="h3">
           154

@@ -44,7 +44,7 @@ const Tasks = () => {
             control={
               <Checkbox onClick={handleAllToggle} checked={tasks.some((item) => item.checked)} />
             }
-            label="Tasks"
+            label="Maintenance Log"
           />
         </FormGroup>
 

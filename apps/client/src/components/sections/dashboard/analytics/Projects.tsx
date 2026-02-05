@@ -14,14 +14,14 @@ const Projects = () => {
         bgcolor="info.main"
         borderRadius="50%"
       >
-        <IconifyIcon icon="ic:baseline-file-copy" fontSize="h3.fontSize" color="primary.main" />
+        <IconifyIcon icon="ic:round-sensors" fontSize="h2.fontSize" color="primary.main" />
       </Stack>
       <div>
         <Typography variant="body2" color="text.disabled" noWrap>
-          Total Projects
+          Active Sensors
         </Typography>
         <Typography mt={0.25} variant="h3">
-          2935
+          142
         </Typography>
       </div>
     </Stack>

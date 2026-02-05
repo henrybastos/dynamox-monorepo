@@ -10,7 +10,7 @@ import { useMemo } from 'react';
 
 interface PiChartProps {
   sx?: SxProps;
-  chartRef: React.RefObject<EChartsReactCore>;
+  chartRef: React.RefObject<EChartsReactCore | null>;
 }
 
 echarts.use([PieChart, TooltipComponent, CanvasRenderer]);
@@ -33,7 +33,12 @@ const PiChart = ({ chartRef, ...rest }: PiChartProps) => {
             return {
               ...item,
               itemStyle: {
-                color: item.id === 1 ? theme.palette.primary.main : theme.palette.secondary.main,
+                color:
+                  item.id === 1
+                    ? theme.palette.primary.main
+                    : item.id === 2
+                      ? theme.palette.secondary.main
+                      : theme.palette.warning.main,
               },
             };
           }),

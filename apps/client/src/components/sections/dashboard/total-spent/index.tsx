@@ -23,18 +23,18 @@ const TotalSpent = () => {
           bgcolor="info.main"
           borderRadius={2.5}
         >
-          <IconifyIcon icon="ic:round-bar-chart" color="primary.main" fontSize="h4.fontSize" />
+          <IconifyIcon icon="ic:round-insights" color="primary.main" fontSize="h4.fontSize" />
         </Stack>
       </Stack>
 
       <Stack direction={{ xs: 'column', sm: 'row' }} mt={1.75}>
         <Box minWidth={150}>
           <Typography mt={0.35} variant="h2" color="text.primary">
-            $37.5K
+            1.2M
           </Typography>
           <Stack spacing={1}>
             <Typography variant="body2" color="text.disabled" fontWeight={500}>
-              Total Spent
+              Total Telemetry
             </Typography>
 
             <Stack alignItems="center" spacing={0.25}>
@@ -44,14 +44,14 @@ const TotalSpent = () => {
                 fontSize="h6.fontSize"
               />
               <Typography variant="caption" color="success.main" fontWeight={700}>
-                +2.45%
+                +12.5%
               </Typography>
             </Stack>
           </Stack>
           <Stack mt={2} alignItems="center" spacing={0.5}>
             <IconifyIcon icon="ic:round-check-circle" color="success.main" fontSize="h6.fontSize" />
             <Typography variant="body1" color="success.main" fontWeight={700}>
-              On track
+              System Healthy
             </Typography>
           </Stack>
         </Box>

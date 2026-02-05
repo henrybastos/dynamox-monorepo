@@ -7,27 +7,27 @@ export interface TaskProps {
 export const tasksData: TaskProps[] = [
   {
     id: 1,
-    task: 'Landing Page Design',
+    task: 'Calibrate Sensor TcAg-01',
     checked: false,
   },
   {
     id: 2,
-    task: 'Dashboard Builder',
+    task: 'Replace Pump A1 Filter',
     checked: true,
   },
   {
     id: 3,
-    task: 'Mobile App Design',
+    task: 'Inspect Fan B2 Vibration',
     checked: true,
   },
   {
     id: 4,
-    task: 'Illustrations',
+    task: 'Update Firmware Gateway',
     checked: false,
   },
   {
     id: 5,
-    task: 'Promotional LP',
+    task: 'Check Redis Persistence',
     checked: true,
   },
 ];

@@ -6,6 +6,7 @@ const App = lazy(() => import('App'));
 const MainLayout = lazy(() => import('layouts/main-layout'));
 const AuthLayout = lazy(() => import('layouts/auth-layout'));
 const Dashboard = lazy(() => import('pages/dashboard/Dashboard'));
+const Machines = lazy(() => import('pages/machines/Machines'));
 const SignIn = lazy(() => import('pages/authentication/SignIn'));
 const SignUp = lazy(() => import('pages/authentication/SignUp'));
 const Page404 = lazy(() => import('pages/errors/Page404'));
@@ -34,6 +35,10 @@ export const routes = [
           {
             index: true,
             element: <Dashboard />,
+          },
+          {
+            path: paths.machines,
+            element: <Machines />,
           },
         ],
       },

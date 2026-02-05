@@ -11,7 +11,7 @@ const Revenue = () => {
   return (
     <Box component={Paper} height={350}>
       <Stack justifyContent="space-between">
-        <Typography variant="h4">Weekly Revenue</Typography>
+        <Typography variant="h4">Machine Activity</Typography>
         <Stack
           component={ButtonBase}
           alignItems="center"

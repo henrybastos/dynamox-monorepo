@@ -24,7 +24,7 @@ const ComplexTable = () => {
         justifyContent="space-between"
       >
         <Typography variant="h4" textAlign={{ xs: 'center', sm: 'left' }}>
-          Complex Table
+          Machine Events
         </Typography>
 
         <TextField

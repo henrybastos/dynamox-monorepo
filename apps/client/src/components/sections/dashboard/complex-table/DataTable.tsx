@@ -87,7 +87,7 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
   },
   {
     field: 'progress',
-    headerName: 'PROGRESS',
+    headerName: 'EFFICIENCY',
     editable: false,
     align: 'left',
     flex: 2,
@@ -117,7 +117,7 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
   },
   {
     field: 'quantity',
-    headerName: 'QUANTITY',
+    headerName: 'READINGS',
     editable: false,
     align: 'left',
     flex: 2,
@@ -125,7 +125,7 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
   },
   {
     field: 'balance',
-    headerName: 'BALANCE',
+    headerName: 'CONDITION',
     headerAlign: 'right',
     align: 'right',
     editable: false,
