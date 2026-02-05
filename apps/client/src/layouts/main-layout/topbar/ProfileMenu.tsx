@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSession, signOut } from 'next-auth/react';
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
 import Stack from '@mui/material/Stack';
@@ -51,6 +52,7 @@ const menuItems: MenuItems[] = [
 ];
 
 const ProfileMenu = () => {
+  const { data: session } = useSession();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -60,6 +62,10 @@ const ProfileMenu = () => {
 
   const handleProfileMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    signOut({ callbackUrl: '/auth/sign-in' });
   };
 
   return (
@@ -102,10 +108,10 @@ const ProfileMenu = () => {
             <Avatar src={ProfileImage} sx={{ mr: 1, height: 42, width: 42 }} />
             <Stack direction="column">
               <Typography variant="body2" color="text.primary" fontWeight={600}>
-                Jason Statham
+                {session?.user?.name || 'User'}
               </Typography>
               <Typography variant="caption" color="text.secondary" fontWeight={400}>
-                jason@example.com
+                {session?.user?.email || 'user@example.com'}
               </Typography>
             </Stack>
           </MenuItem>
@@ -116,7 +122,11 @@ const ProfileMenu = () => {
         <Box p={1}>
           {menuItems.map((item) => {
             return (
-              <MenuItem key={item.id} onClick={handleProfileMenuClose} sx={{ py: 1 }}>
+              <MenuItem
+                key={item.id}
+                onClick={item.title === 'Logout' ? handleLogout : handleProfileMenuClose}
+                sx={{ py: 1 }}
+              >
                 <ListItemIcon sx={{ mr: 1, color: 'text.secondary', fontSize: 'h5.fontSize' }}>
                   <IconifyIcon icon={item.icon} />
                 </ListItemIcon>

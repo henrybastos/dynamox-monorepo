@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { fontFamily } from 'theme/typography';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
@@ -13,6 +14,8 @@ import SidebarCard from './SidebarCard';
 import sitemap from 'routes/sitemap';
 
 const DrawerItems = () => {
+  const location = useLocation();
+
   return (
     <>
       <Stack
@@ -28,12 +31,12 @@ const DrawerItems = () => {
         zIndex={1000}
       >
         <ButtonBase component={Link} href="/" disableRipple>
-          <Image src={HorizonLogo} alt="logo" height={44} width={44} sx={{ mr: 1.75 }} />
+          <Image src={typeof HorizonLogo === 'string' ? HorizonLogo : HorizonLogo.src} alt="logo" height={44} width={44} sx={{ mr: 1.75 }} />
           <Typography
             variant="h3"
             textTransform="uppercase"
             letterSpacing={1}
-            fontFamily={fontFamily.poppins}
+            fontFamily={fontFamily.Poppins}
           >
             Horizon
           </Typography>
@@ -41,13 +44,14 @@ const DrawerItems = () => {
       </Stack>
 
       <List component="nav" sx={{ mt: 2.5, mb: 10, p: 0, pl: 3 }}>
-        {sitemap.map((route) =>
-          route.items ? (
-            <CollapseListItem key={route.id} {...route} />
+        {sitemap.map((route) => {
+          const active = location.pathname === route.path;
+          return route.items ? (
+            <CollapseListItem key={route.id} {...route} active={active} />
           ) : (
-            <ListItem key={route.id} {...route} />
-          ),
-        )}
+            <ListItem key={route.id} {...route} active={active} />
+          );
+        })}
       </List>
 
       <Box mt="auto" px={3} pt={15} pb={5}>

@@ -1,4 +1,6 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import { signIn, useSession } from 'next-auth/react';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -17,17 +19,38 @@ interface User {
   [key: string]: string;
 }
 
-const SignIn = () => {
+const SignInView = () => {
+  const { status } = useSession();
+  const navigate = useNavigate();
   const [user, setUser] = useState<User>({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      navigate('/');
+    }
+  }, [status, navigate]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user);
+    setError(null);
+
+    const result = await signIn('credentials', {
+      redirect: false,
+      email: user.email,
+      password: user.password,
+    });
+
+    if (result?.error) {
+      setError(result.error);
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -62,6 +85,12 @@ const SignIn = () => {
         <Typography mt={1.5} variant="body2" color="text.disabled">
           Enter your email and password to sign in!
         </Typography>
+
+        {error && (
+          <Typography mt={2} color="error" variant="body2" textAlign="center">
+            {error}
+          </Typography>
+        )}
 
         <Button
           variant="contained"
@@ -166,13 +195,14 @@ const SignIn = () => {
       </Box>
 
       <Typography variant="body2" color="text.disabled" fontWeight={500}>
-        © 2024 Horizon UI. Made with ❤️ by{' '}
+        © 2024 Horizon UI. Made with ❤️ by
         <Link href="https://themewagon.com/" target="_blank" rel="noreferrer" fontWeight={600}>
-          {'ThemeWagon'}
-        </Link>{' '}
+          {' ThemeWagon '}
+        </Link>
+        and Henry Bastos for Dynamox
       </Typography>
     </Stack>
   );
 };
 
-export default SignIn;
+export default SignInView;

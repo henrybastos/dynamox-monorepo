@@ -3,18 +3,26 @@ import { prisma, redis } from '@source/persistence';
 
 @Injectable()
 export class AppService {
-  async processTelemetry(data: { sensorId: string; value: number; timestamp?: string }) {
-    const { sensorId, value } = data;
+  async processTelemetry(data: { 
+    sensorId: string; 
+    accelerationValue: number; 
+    velocityValue: number; 
+    temperatureValue: number; 
+    timestamp?: string 
+  }) {
+    const { sensorId, accelerationValue, velocityValue, temperatureValue } = data;
     const timestamp = data.timestamp ? new Date(data.timestamp) : new Date();
 
-    console.log(`Processing telemetry for sensor ${sensorId}: ${value}`);
+    console.log(`Processing telemetry for sensor ${sensorId}: A:${accelerationValue} V:${velocityValue} T:${temperatureValue}`);
 
     try {
       // 1. Store in PostgreSQL
       await prisma.telemetry.create({
         data: {
           sensorId,
-          value,
+          accelerationValue,
+          velocityValue,
+          temperatureValue,
           timestamp,
         },
       });
@@ -24,12 +32,19 @@ export class AppService {
 
       // 3. Update Latest State in Redis (Hash)
       await redis.hset(`telemetry:sensor:${sensorId}:latest`, {
-        value: value.toString(),
+        accelerationValue: accelerationValue.toString(),
+        velocityValue: velocityValue.toString(),
+        temperatureValue: temperatureValue.toString(),
         timestamp: timestamp.toISOString(),
       });
 
       // 4. Update Stream (List/Stream for real-time charts)
-      await redis.lpush(`telemetry:sensor:${sensorId}:stream`, JSON.stringify({ value, timestamp }));
+      await redis.lpush(`telemetry:sensor:${sensorId}:stream`, JSON.stringify({ 
+        accelerationValue, 
+        velocityValue, 
+        temperatureValue, 
+        timestamp 
+      }));
       await redis.ltrim(`telemetry:sensor:${sensorId}:stream`, 0, 999); // Keep last 1000 points
 
     } catch (error) {

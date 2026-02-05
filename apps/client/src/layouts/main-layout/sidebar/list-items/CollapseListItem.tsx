@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import { MenuItem } from 'routes/sitemap';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import List from '@mui/material/List';
 import Collapse from '@mui/material/Collapse';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -9,8 +9,18 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import IconifyIcon from 'components/base/IconifyIcon';
 
-const CollapseListItem = ({ subheader, active, items, icon }: MenuItem) => {
+const CollapseListItem = ({ subheader, active: propActive, items, icon }: MenuItem) => {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+
+  const isChildActive = items?.some((item) => location.pathname === item.path);
+  const active = propActive || isChildActive;
+
+  useEffect(() => {
+    if (isChildActive) {
+      setOpen(true);
+    }
+  }, [isChildActive]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -34,6 +44,7 @@ const CollapseListItem = ({ subheader, active, items, icon }: MenuItem) => {
           sx={{
             '& .MuiListItemText-primary': {
               color: active ? 'primary.main' : null,
+              fontWeight: active ? 600 : 500,
             },
           }}
         />
@@ -50,18 +61,25 @@ const CollapseListItem = ({ subheader, active, items, icon }: MenuItem) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {items?.map((route) => {
+            const isItemActive = location.pathname === route.path;
             return (
               <ListItemButton
                 key={route.pathName}
                 component={Link}
-                href={route.path}
-                sx={{ ml: 2.25, bgcolor: route.active ? 'info.main' : null }}
+                to={route.path}
+                sx={{
+                  ml: 2.25,
+                  bgcolor: isItemActive ? 'info.main' : null,
+                  textDecoration: 'none',
+                  color: 'inherit',
+                }}
               >
                 <ListItemText
                   primary={route.pathName}
                   sx={{
                     '& .MuiListItemText-primary': {
-                      color: 'text.disabled',
+                      color: isItemActive ? 'primary.main' : 'text.disabled',
+                      fontWeight: isItemActive ? 600 : 500,
                     },
                   }}
                 />

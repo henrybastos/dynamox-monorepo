@@ -1,12 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/store';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
-import { machinesRows } from 'data/machinesData';
 import MachineActionMenu from './MachineActionMenu';
 
-const columns: GridColDef<(typeof machinesRows)[number]>[] = [
+const columns: GridColDef[] = [
   {
     field: 'id',
     headerName: 'ID',
@@ -20,7 +21,7 @@ const columns: GridColDef<(typeof machinesRows)[number]>[] = [
       </Typography>
     ),
     renderCell: (params) => (
-      <Stack ml={1} height={1} direction="column" alignSelf="center" justifyContent="center">
+      <Stack ml={1} height={1} width={'min-content'} direction="column" alignSelf="center" justifyContent="center">
         <Typography variant="body2" fontWeight={600}>
           {params.value}
         </Typography>
@@ -44,6 +45,7 @@ const columns: GridColDef<(typeof machinesRows)[number]>[] = [
     field: 'monitoringPointsCount',
     headerName: 'Spots',
     editable: false,
+    headerAlign: 'center',
     align: 'center',
     flex: 1,
     minWidth: 80,
@@ -57,6 +59,7 @@ const columns: GridColDef<(typeof machinesRows)[number]>[] = [
     field: 'velocity',
     headerName: 'Vel (mm/s)',
     editable: false,
+    headerAlign: 'center',
     align: 'center',
     flex: 1,
     minWidth: 100,
@@ -66,15 +69,16 @@ const columns: GridColDef<(typeof machinesRows)[number]>[] = [
       </Typography>
     ),
     renderCell: (params) => (
-        <Typography variant="body2" fontWeight={600}>
-          {params.value}
-        </Typography>
+      <Typography variant="body2" fontWeight={600}>
+        {params.value ?? '-'}
+      </Typography>
     ),
   },
   {
     field: 'acceleration',
     headerName: 'Acc (g)',
     editable: false,
+    headerAlign: 'center',
     align: 'center',
     flex: 1,
     minWidth: 100,
@@ -84,15 +88,16 @@ const columns: GridColDef<(typeof machinesRows)[number]>[] = [
       </Typography>
     ),
     renderCell: (params) => (
-        <Typography variant="body2" fontWeight={600}>
-          {params.value}
-        </Typography>
+      <Typography variant="body2" fontWeight={600}>
+        {params.value ?? '-'}
+      </Typography>
     ),
   },
   {
     field: 'temperature',
     headerName: 'Temp (°C)',
     editable: false,
+    headerAlign: 'center',
     align: 'center',
     flex: 1,
     minWidth: 100,
@@ -102,9 +107,9 @@ const columns: GridColDef<(typeof machinesRows)[number]>[] = [
       </Typography>
     ),
     renderCell: (params) => (
-        <Typography variant="body2" fontWeight={600}>
-          {params.value}
-        </Typography>
+      <Typography variant="body2" fontWeight={600}>
+        {params.value ?? '-'}
+      </Typography>
     ),
   },
   {
@@ -125,6 +130,18 @@ interface MachinesTableProps {
 
 const MachinesTable = ({ searchText }: MachinesTableProps) => {
   const apiRef = useGridApiRef<GridApi>();
+  const { items, status } = useSelector((state: RootState) => state.machines);
+
+  const rows = useMemo(() => {
+    return items.map((machine) => ({
+      id: machine.id,
+      name: machine.name,
+      monitoringPointsCount: machine.monitoringPoints?.length || 0,
+      velocity: null, // No telemetry in machines list for now
+      acceleration: null,
+      temperature: null,
+    }));
+  }, [items]);
 
   useEffect(() => {
     apiRef.current.setQuickFilterValues(searchText.split(/\b\W+\b/).filter((word) => word !== ''));
@@ -133,9 +150,10 @@ const MachinesTable = ({ searchText }: MachinesTableProps) => {
   return (
     <DataGrid
       apiRef={apiRef}
+      loading={status === 'loading'}
       density="standard"
       columns={columns}
-      rows={machinesRows}
+      rows={rows}
       rowHeight={52}
       disableColumnResize
       disableColumnMenu

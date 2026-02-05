@@ -64,7 +64,9 @@ model Telemetry {
   id        BigInt   @id @default(autoincrement())
   sensorId  String   @map("sensor_id")
   sensor    Sensor   @relation(fields: [sensorId], references: [id])
-  value     Float
+  accelerationValue     Float
+  velocityValue     Float
+  temperatureValue     Float
   timestamp DateTime @default(now())
 
   @@map("telemetry")

@@ -16,18 +16,23 @@ async function simulate() {
 
     setInterval(async () => {
       const sensorId = sensors[Math.floor(Math.random() * sensors.length)];
-      const value = parseFloat((Math.random() * 100).toFixed(2));
+      const accelerationValue = parseFloat((Math.random() * 2).toFixed(2));
+      const velocityValue = parseFloat((Math.random() * 10).toFixed(2));
+      const temperatureValue = parseFloat((20 + Math.random() * 60).toFixed(2));
+      
       const payload = {
         pattern: 'telemetry_data',
         data: {
           sensorId,
-          value,
+          accelerationValue,
+          velocityValue,
+          temperatureValue,
           timestamp: new Date().toISOString(),
         }
       };
 
       channel.sendToQueue(QUEUE, Buffer.from(JSON.stringify(payload)));
-      console.log(`Sent: ${sensorId} -> ${value}`);
+      console.log(`Sent: ${sensorId} -> A:${accelerationValue} V:${velocityValue} T:${temperatureValue}`);
     }, 2000);
 
   } catch (error) {

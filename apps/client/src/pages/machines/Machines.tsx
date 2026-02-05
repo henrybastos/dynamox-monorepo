@@ -1,8 +1,18 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from 'store/store';
+import { fetchMachines } from 'store/slices/machinesSlice';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import MachinesSection from 'components/sections/machines';
 
 const Machines = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchMachines());
+  }, [dispatch]);
+
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
       <Grid container spacing={3}>

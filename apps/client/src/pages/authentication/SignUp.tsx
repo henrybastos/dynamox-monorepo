@@ -1,4 +1,6 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -16,8 +18,16 @@ interface User {
 }
 
 const SignUp = () => {
+  const { status } = useSession();
+  const navigate = useNavigate();
   const [user, setUser] = useState<User>({ name: '', email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      navigate('/');
+    }
+  }, [status, navigate]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });

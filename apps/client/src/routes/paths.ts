@@ -1,7 +1,7 @@
 export const rootPaths = {
   root: '/',
   pagesRoot: '/pages',
-  authRoot: 'authentication',
+  authRoot: 'auth',
 };
 
 export default {

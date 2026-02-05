@@ -1,5 +1,5 @@
 import { MenuItem } from 'routes/sitemap';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -9,7 +9,7 @@ import IconifyIcon from 'components/base/IconifyIcon';
 
 const ListItem = ({ subheader, icon, path, active }: MenuItem) => {
   return (
-    <Stack mb={1} component={Link} href={path} alignItems="center" justifyContent="space-between">
+    <Stack mb={1} component={Link} to={path || '#!'} alignItems="center" justifyContent="space-between" sx={{ textDecoration: 'none' }}>
       <ListItemButton>
         <ListItemIcon>
           {icon && (
@@ -37,7 +37,7 @@ const ListItem = ({ subheader, icon, path, active }: MenuItem) => {
         height={36}
         width={4}
         borderRadius={10}
-        bgcolor={active && path === '/' ? 'primary.main' : 'transparent'}
+        bgcolor={active ? 'primary.main' : 'transparent'}
       />
     </Stack>
   );
