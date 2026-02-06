@@ -5,10 +5,13 @@ import ComplexTable from 'components/sections/dashboard/complex-table';
 import PiChart from 'components/sections/dashboard/your-pi-chart';
 import Revenue from 'components/sections/dashboard/revenue';
 import Tasks from 'components/sections/dashboard/tasks';
+import PageTitle from 'components/common/PageTitle';
 
 const Dashboard = () => {
   return (
-    <Grid container spacing={2.5}>
+    <>
+      <PageTitle title="Dashboard" />
+      <Grid container spacing={2.5}>
       <Grid item xs={12}>
         <Analytics />
       </Grid>
@@ -28,7 +31,8 @@ const Dashboard = () => {
         <ComplexTable />
       </Grid>
     </Grid>
-  );
+  </>
+);
 };
 
 export default Dashboard;

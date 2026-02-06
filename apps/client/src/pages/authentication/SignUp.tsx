@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import IconifyIcon from 'components/base/IconifyIcon';
 import paths from 'routes/paths';
+import PageTitle from 'components/common/PageTitle';
 
 interface User {
   [key: string]: string;
@@ -39,15 +40,17 @@ const SignUp = () => {
   };
 
   return (
-    <Stack
-      mx="auto"
-      width={410}
-      height="auto"
-      minHeight={800}
-      direction="column"
-      alignItems="center"
-      justifyContent="space-between"
-    >
+    <>
+      <PageTitle title="Sign Up" />
+      <Stack
+        mx="auto"
+        width={410}
+        height="auto"
+        minHeight={800}
+        direction="column"
+        alignItems="center"
+        justifyContent="space-between"
+      >
       <Box width={1}>
         <Button
           variant="text"
@@ -183,7 +186,8 @@ const SignUp = () => {
         </Link>{' '}
       </Typography>
     </Stack>
-  );
+  </>
+);
 };
 
 export default SignUp;

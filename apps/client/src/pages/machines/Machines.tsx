@@ -5,6 +5,7 @@ import { fetchMachines } from 'store/slices/machinesSlice';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import MachinesSection from 'components/sections/machines';
+import PageTitle from 'components/common/PageTitle';
 
 const Machines = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -14,13 +15,16 @@ const Machines = () => {
   }, [dispatch]);
 
   return (
-    <Container maxWidth="xl" sx={{ py: 4 }}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <MachinesSection />
+    <>
+      <PageTitle title="Manage Machines" />
+      <Container maxWidth="xl" sx={{ py: 4 }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <MachinesSection />
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 };
 

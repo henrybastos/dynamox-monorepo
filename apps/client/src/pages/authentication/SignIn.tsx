@@ -18,6 +18,7 @@ import Checkbox from '@mui/material/Checkbox';
 import IconifyIcon from 'components/base/IconifyIcon';
 import paths from 'routes/paths';
 import { theme } from 'theme/theme';
+import PageTitle from 'components/common/PageTitle';
 
 const signInSchema = z.object({
   email: z.email('Invalid email address'),
@@ -63,15 +64,17 @@ const SignInView = () => {
   };
 
   return (
-    <Stack
-      mx="auto"
-      width={410}
-      height="auto"
-      minHeight={800}
-      direction="column"
-      alignItems="center"
-      justifyContent="space-between"
-    >
+    <>
+      <PageTitle title="Sign In" />
+      <Stack
+        mx="auto"
+        width={410}
+        height="auto"
+        minHeight={800}
+        direction="column"
+        alignItems="center"
+        justifyContent="space-between"
+      >
       <Box width={1}>
         <Button
           variant="text"
@@ -211,7 +214,8 @@ const SignInView = () => {
         and Henry Bastos for Dynamox
       </Typography>
     </Stack>
-  );
+  </>
+);
 };
 
 export default SignInView;
