@@ -92,7 +92,7 @@ const RevenueChart = ({ data, ...rest }: BarChartProps) => {
               ? theme.palette.primary.light
               : index === 1
                 ? theme.palette.secondary.light
-                : theme.palette.info.darker,
+                : theme.palette.neutral.darker,
           borderRadius: index === 2 ? [10, 10, 0, 0] : [0, 0, 0, 0],
         },
         data: item.data,

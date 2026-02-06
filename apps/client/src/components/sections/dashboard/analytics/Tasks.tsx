@@ -11,7 +11,7 @@ const Tasks = () => {
         justifyContent="center"
         height={56}
         width={56}
-        bgcolor="info.main"
+        bgcolor="neutral.light"
         borderRadius="50%"
       >
         <IconifyIcon icon="ic:round-location-on" fontSize="h2.fontSize" color="primary.main" />

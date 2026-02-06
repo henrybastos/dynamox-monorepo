@@ -87,7 +87,7 @@ const CountryMenu = () => {
             <MenuItem
               key={item.id}
               onClick={() => handleMenuItemClick(countries[index])}
-              sx={{ mb: 0.5, bgcolor: country.id === item.id ? 'info.main' : null }}
+              sx={{ mb: 0.5, bgcolor: country.id === item.id ? 'neutral.main' : null }}
             >
               <ListItemIcon sx={{ mr: 1.5, fontSize: 'h2.fontSize' }}>
                 <IconifyIcon icon={item.flag} />

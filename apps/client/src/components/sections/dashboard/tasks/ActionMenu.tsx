@@ -58,7 +58,7 @@ const ActionMenu = () => {
         justifyContent="center"
         height={36}
         width={36}
-        bgcolor="info.main"
+        bgcolor="neutral.main"
         borderRadius={theme.shape.borderRadius * 1}
       >
         <IconifyIcon icon="ic:baseline-more-horiz" color="primary.main" fontSize="h4.fontSize" />

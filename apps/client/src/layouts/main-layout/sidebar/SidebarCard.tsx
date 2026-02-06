@@ -1,7 +1,6 @@
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import HorizonLogo from 'assets/images/logo-white.png';
 import Image from 'components/base/Image';
 
 const Logo = () => {
@@ -12,7 +11,7 @@ const Logo = () => {
       height={94}
       width={94}
       border={4}
-      borderColor="info.lighter"
+      borderColor="neutral.lighter"
       borderRadius="50%"
       position="absolute"
       top={0}
@@ -22,7 +21,7 @@ const Logo = () => {
         transform: 'translate(-50%, -50%)',
       })}
     >
-      <Image src={HorizonLogo} sx={{ width: 40, height: 40 }} />
+      <Image src={'/images/logo-white.png'} sx={{ width: 40, height: 40 }} />
     </Stack>
   );
 };
@@ -44,8 +43,8 @@ const SidebarCard = () => {
       })}
     >
       <Logo />
-      <Button sx={{ color: 'info.lighter', fontWeight: 700 }}>Upgrade to PRO</Button>
-      <Typography variant="body2" color="info.darker" lineHeight={1.75}>
+      <Button sx={{ color: 'neutral.lighter', fontWeight: 700 }}>Upgrade to PRO</Button>
+      <Typography variant="body2" color="neutral.darker" lineHeight={1.75}>
         to get access to all features! <br />
         Connect with Venus World!
       </Typography>

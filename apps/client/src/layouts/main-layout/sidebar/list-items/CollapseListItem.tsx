@@ -69,7 +69,7 @@ const CollapseListItem = ({ subheader, active: propActive, items, icon }: MenuIt
                 to={route.path}
                 sx={{
                   ml: 2.25,
-                  bgcolor: isItemActive ? 'info.main' : null,
+                  bgcolor: isItemActive ? 'neutral.main' : null,
                   textDecoration: 'none',
                   color: 'inherit',
                 }}

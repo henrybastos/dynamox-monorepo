@@ -8,7 +8,7 @@ I need a project for registering machines and monitoring points. the machines ca
 
 **Machines:** Any type of equipment which properties and performance can be monitored by any Sensor.
 
-**Sensors:** An equipment capable of reading and processing information about a Machine.
+**Sensors:** An equipment capable of reading and processing neutralrmation about a Machine.
 
 **Monitoring Point:** A characteristic of a Machine that can be read and interpreted by a Sensor.
 
@@ -29,7 +29,7 @@ I need a project for registering machines and monitoring points. the machines ca
 
 ---
 
-### **Informações Técnicas Gerais**
+### **neutralrmações Técnicas Gerais**
 
 * **Monitoramento de Temperatura**: Todos os sensores possuem resolução de 0.01°C para temperatura de contato.
 * **Capacidade de Memória**: Os dispositivos possuem memória ajustável para 51.200 amostras.
@@ -48,7 +48,7 @@ I need a project for registering machines and monitoring points. the machines ca
 ## 2 - Machine Management
 
 - As a user, I want to create a new machine with an arbitrary name and with a type selected from a list ["Pump", "Fan"] so that I can manage it later.
-- As a user, I want to change the attributes (name and type) of a machine after creating it so that I can keep the machine information updated.
+- As a user, I want to change the attributes (name and type) of a machine after creating it so that I can keep the machine neutralrmation updated.
 - As a user, I want to delete a machine when it is no longer in use so that it doesn't clutter the system.
 
 ## 3 - Monitoring Points and Sensors Management
@@ -56,8 +56,8 @@ I need a project for registering machines and monitoring points. the machines ca
 - As a user, I want to create at least two monitoring points with arbitrary names for an existing machine, so that I can monitor the machine's performance.
 - As a user, I want to associate a sensor to an existing monitoring point so that I can monitor the machine's performance. The sensor should have a unique ID, and the sensor model name should be one of ["TcAg", "TcAs", "HF+"].
 - As a user, I want the system to prevent me from setting up "TcAg" and "TcAs" sensors for machines of the type "Pump".
-- As a user, I want to see all my monitoring points in a paginated list so that I can manage them. The list should display up to 5 monitoring points per page and should include the following information: "Machine Name", "Machine Type", "Monitoring Point Name", and "Sensor Model".
-- As a user, I want to sort the monitoring points list by any of its columns in ascending or descending order, so that I can easily find the information I'm looking for.
+- As a user, I want to see all my monitoring points in a paginated list so that I can manage them. The list should display up to 5 monitoring points per page and should include the following neutralrmation: "Machine Name", "Machine Type", "Monitoring Point Name", and "Sensor Model".
+- As a user, I want to sort the monitoring points list by any of its columns in ascending or descending order, so that I can easily find the neutralrmation I'm looking for.
 
 ## 4 - Ambiguity Handling
 

@@ -17,13 +17,14 @@ import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import IconifyIcon from 'components/base/IconifyIcon';
 import paths from 'routes/paths';
+import { theme } from 'theme/theme';
 
 const signInSchema = z.object({
   email: z.email('Invalid email address'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
 });
 
-type SignInFormData = z.infer<typeof signInSchema>;
+type SignneutralrmData = z.infer<typeof signInSchema>;
 
 const SignInView = () => {
   const { status } = useSession();
@@ -35,7 +36,7 @@ const SignInView = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<SignInFormData>({
+  } = useForm<SignneutralrmData>({
     resolver: zodResolver(signInSchema),
   });
 
@@ -45,7 +46,7 @@ const SignInView = () => {
     }
   }, [status, navigate]);
 
-  const onSubmit = async (data: SignInFormData) => {
+  const onSubmit = async (data: SignneutralrmData) => {
     setError(null);
 
     const result = await signIn('credentials', {
@@ -90,17 +91,11 @@ const SignInView = () => {
 
       <Box width={1}>
         <Typography variant="h3">Sign In</Typography>
-        <Typography mt={1.5} variant="body2" color="text.disabled">
+        <Typography mt={1.5} mb={3.5} variant="body2" color="text.secondary">
           Enter your email and password to sign in!
         </Typography>
 
-        {error && (
-          <Typography mt={2} color="error" variant="body2" textAlign="center">
-            {error}
-          </Typography>
-        )}
-
-        <Button
+        {/* <Button
           variant="contained"
           color="secondary"
           size="large"
@@ -109,15 +104,15 @@ const SignInView = () => {
           sx={{
             mt: 4,
             fontWeight: 600,
-            bgcolor: 'info.main',
+            bgcolor: 'neutral.main',
             '& .MuiButton-startIcon': { mr: 1.5 },
-            '&:hover': { bgcolor: 'info.main' },
+            '&:hover': { bgcolor: 'neutral.main' },
           }}
         >
           Sign in with Google
-        </Button>
+        </Button> */}
 
-        <Divider sx={{ my: 3 }}>or</Divider>
+        {/* <Divider sx={{ my: 3 }}>or</Divider> */}
 
         <Box component="form" onSubmit={handleSubmit(onSubmit)}>
           <TextField
@@ -134,6 +129,7 @@ const SignInView = () => {
             helperText={errors.email?.message}
             sx={{ mt: 3 }}
           />
+
           <TextField
             id="password"
             label="Password"
@@ -181,12 +177,18 @@ const SignInView = () => {
             variant="contained"
             size="large"
             disabled={isSubmitting}
-            sx={{ mt: 3 }}
+            sx={{ mt: 3, backgroundColor: theme.palette.secondary.main }}
             fullWidth
           >
             {isSubmitting ? 'Signing In...' : 'Sign In'}
           </Button>
         </Box>
+
+        {error && (
+          <Typography sx={{ marginTop: 2, fontWeight: '600' }} color="error" variant="body2" textAlign="center">
+            Erro: {error}
+          </Typography>
+        )}
 
         <Typography
           mt={3}

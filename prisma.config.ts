@@ -5,7 +5,7 @@ export default defineConfig({
   schema: 'libs/shared/persistence/prisma/schema.prisma',
   migrations: {
     path: 'libs/shared/persistence/prisma/migrations',
-    seed: 'ts-node libs/shared/persistence/prisma/seed.ts',
+    seed: 'tsx libs/shared/persistence/prisma/seed.ts',
   },
   datasource: {
     // using process.env here as typically env() helper might need context

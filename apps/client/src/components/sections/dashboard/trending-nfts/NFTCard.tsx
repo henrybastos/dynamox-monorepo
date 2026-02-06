@@ -18,7 +18,7 @@ interface NFTCardProps {
 
 const NFTCard = ({ data }: NFTCardProps) => {
   return (
-    <Card sx={{ p: 2, bgcolor: 'info.dark', userSelect: 'none' }}>
+    <Card sx={{ p: 2, bgcolor: 'neutral.dark', userSelect: 'none' }}>
       <Box position="relative">
         <CardMedia component="img" height="120" image={data.image} alt="nft_image" />
         <IconButton
@@ -30,8 +30,8 @@ const NFTCard = ({ data }: NFTCardProps) => {
             position: 'absolute',
             top: 10,
             right: 10,
-            bgcolor: 'info.lighter',
-            '&:hover': { bgcolor: 'info.lighter' },
+            bgcolor: 'neutral.lighter',
+            '&:hover': { bgcolor: 'neutral.lighter' },
           }}
         >
           <IconifyIcon icon="ic:sharp-favorite-border" sx={{ pointerEvents: 'none' }} />

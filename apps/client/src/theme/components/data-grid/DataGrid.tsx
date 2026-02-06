@@ -6,7 +6,7 @@ const DataGrid: Components<Omit<Theme, 'components'>>['MuiDataGrid'] = {
     root: ({ theme }) => ({
       border: 'none',
       borderRadius: '0 !important',
-      '--DataGrid-rowBorderColor': theme.palette.info.lighter,
+      '--DataGrid-rowBorderColor': theme.palette.neutral.lighter,
       '&:hover, &:focus': {
         '*::-webkit-scrollbar, *::-webkit-scrollbar-thumb': {
           visibility: 'visible',
@@ -42,7 +42,7 @@ const DataGrid: Components<Omit<Theme, 'components'>>['MuiDataGrid'] = {
     columnHeader: ({ theme }) => ({
       padding: 0,
       borderBottom: 1,
-      borderColor: `${theme.palette.info.main} !important`,
+      borderColor: `${theme.palette.neutral.main} !important`,
       height: '3rem !important',
       '&:focus-within': {
         outline: 'none !important',
@@ -69,7 +69,7 @@ const DataGrid: Components<Omit<Theme, 'components'>>['MuiDataGrid'] = {
       border: 0,
       borderTop: 1,
       borderStyle: 'solid',
-      borderColor: `${theme.palette.info.main} !important`,
+      borderColor: `${theme.palette.neutral.main} !important`,
     }),
   },
 };

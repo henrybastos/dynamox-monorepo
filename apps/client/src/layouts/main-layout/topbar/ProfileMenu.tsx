@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import IconifyIcon from 'components/base/IconifyIcon';
-import ProfileImage from 'assets/images/avatars/avatar1.png';
 
 interface MenuItems {
   id: number;
@@ -78,7 +77,7 @@ const ProfileMenu = () => {
         disableRipple
       >
         <Avatar
-          src={ProfileImage}
+          src={'/images/avatars/avatar1.png'}
           sx={{
             height: 44,
             width: 44,
@@ -104,8 +103,8 @@ const ProfileMenu = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <Box p={1}>
-          <MenuItem onClick={handleProfileMenuClose} sx={{ '&:hover': { bgcolor: 'info.dark' } }}>
-            <Avatar src={ProfileImage} sx={{ mr: 1, height: 42, width: 42 }} />
+          <MenuItem onClick={handleProfileMenuClose} sx={{ '&:hover': { bgcolor: 'neutral.dark' } }}>
+            <Avatar src={'/images/avatars/avatar1.png'} sx={{ mr: 1, height: 42, width: 42 }} />
             <Stack direction="column">
               <Typography variant="body2" color="text.primary" fontWeight={600}>
                 {session?.user?.name || 'User'}

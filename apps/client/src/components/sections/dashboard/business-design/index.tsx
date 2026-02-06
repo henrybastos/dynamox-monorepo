@@ -55,7 +55,7 @@ const BusinessDesign = () => {
         px={3.5}
         py={2.5}
         height={150}
-        bgcolor="info.light"
+        bgcolor="neutral.light"
       >
         <Stack alignItems="center" spacing={3.5}>
           <Stack alignItems="center" justifyContent="center" borderRadius={2.5} spacing={0.75}>

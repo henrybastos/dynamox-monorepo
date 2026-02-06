@@ -67,11 +67,11 @@ const SignUp = () => {
 
       <Box width={1}>
         <Typography variant="h3">Sign Up</Typography>
-        <Typography mt={1.5} variant="body2" color="text.disabled">
+        <Typography mt={1.5} mb={3.5} variant="body2" color="text.secondary">
           Join us and start your journey today!
         </Typography>
 
-        <Button
+        {/* <Button
           variant="contained"
           color="secondary"
           size="large"
@@ -80,15 +80,15 @@ const SignUp = () => {
           sx={{
             mt: 4,
             fontWeight: 600,
-            bgcolor: 'info.main',
+            bgcolor: 'neutral.main',
             '& .MuiButton-startIcon': { mr: 1.5 },
-            '&:hover': { bgcolor: 'info.main' },
+            '&:hover': { bgcolor: 'neutral.main' },
           }}
         >
           Sign up with Google
         </Button>
 
-        <Divider sx={{ my: 3 }}>or</Divider>
+        <Divider sx={{ my: 3 }}>or</Divider> */}
 
         <Box component="form" onSubmit={handleSubmit}>
           <TextField

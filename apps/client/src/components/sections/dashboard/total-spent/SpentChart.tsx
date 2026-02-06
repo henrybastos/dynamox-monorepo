@@ -45,7 +45,7 @@ const SpentChart = ({ data, ...rest }: SpentChartProps) => {
         axisPointer: {
           type: 'none',
           label: {
-            backgroundColor: theme.palette.info.light,
+            backgroundColor: theme.palette.neutral.light,
           },
         },
         backgroundColor: theme.palette.primary.dark,
@@ -53,7 +53,7 @@ const SpentChart = ({ data, ...rest }: SpentChartProps) => {
         borderRadius: 10,
         borderWidth: 0,
         textStyle: {
-          color: theme.palette.info.light,
+          color: theme.palette.neutral.light,
           fontFamily: theme.typography.fontFamily,
         },
         extraCssText: 'border: none; box-shadow: none',

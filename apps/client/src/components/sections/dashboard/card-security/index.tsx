@@ -3,12 +3,11 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Fingerprint from 'assets/images/fingerprint.png';
 
 const CardSecurity = () => {
   return (
     <Stack spacing={3} component={Paper} direction="column" sx={{ height: 350 }}>
-      <Image src={Fingerprint} height={85} width={75} />
+      <Image src={'/images/fingerprint.png'} height={85} width={75} />
 
       <Typography variant="h4">Control card security in-app with a tap</Typography>
 

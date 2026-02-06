@@ -21,7 +21,7 @@ async function main() {
 
   // 2. Create Default User
   const salt = await bcrypt.genSalt();
-  const password = await bcrypt.hash('admin', salt);
+  const password = await bcrypt.hash('admin1234', salt);
   
   const user = await prisma.user.upsert({
     where: { email: 'admin@dynamox.com' },

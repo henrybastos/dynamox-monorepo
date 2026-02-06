@@ -9,7 +9,7 @@ const MenuItem: Components<Omit<Theme, 'components'>>['MuiMenuItem'] = {
       fontSize: theme.typography.body2.fontSize,
       borderRadius: theme.shape.borderRadius * 1.5,
       transition: 'all 0.3s ease-in-out',
-      '&:hover': { backgroundColor: theme.palette.info.dark },
+      '&:hover': { backgroundColor: theme.palette.neutral.dark },
     }),
   },
 };

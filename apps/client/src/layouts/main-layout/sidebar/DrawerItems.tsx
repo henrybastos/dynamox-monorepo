@@ -8,7 +8,6 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import ListItem from './list-items/ListItem';
 import CollapseListItem from './list-items/CollapseListItem';
-import HorizonLogo from 'assets/images/logo-main.png';
 import Image from 'components/base/Image';
 import SidebarCard from './SidebarCard';
 import sitemap from 'routes/sitemap';
@@ -26,12 +25,12 @@ const DrawerItems = () => {
         position="sticky"
         top={0}
         borderBottom={1}
-        borderColor="info.main"
-        bgcolor="info.lighter"
+        borderColor="neutral.main"
+        bgcolor="neutral.lighter"
         zIndex={1000}
       >
         <ButtonBase component={Link} href="/" disableRipple>
-          <Image src={typeof HorizonLogo === 'string' ? HorizonLogo : HorizonLogo.src} alt="logo" height={44} width={44} sx={{ mr: 1.75 }} />
+          <Image src={'/images/logo-main.png'} alt="logo" height={44} width={44} sx={{ mr: 1.75 }} />
           <Typography
             variant="h3"
             textTransform="uppercase"

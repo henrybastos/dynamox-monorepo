@@ -66,7 +66,7 @@ const CalendarHeader = ({ currentMonth, onMonthChange, onYearChange }: CalendarH
           )}
           sx={(theme) => ({
             '&.MuiInputBase-root': {
-              bgcolor: `${theme.palette.info.main} !important`,
+              bgcolor: `${theme.palette.neutral.main} !important`,
               '& .MuiBox-root': {
                 color: 'primary.main',
               },

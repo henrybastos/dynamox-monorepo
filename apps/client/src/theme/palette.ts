@@ -1,5 +1,5 @@
 import { PaletteColorOptions, PaletteOptions } from '@mui/material/styles';
-import { gray, red, green, blue, yellow, skyblue, purple, indigo, white } from './colors';
+import { neutral, red, green, blue, yellow, skyblue, purple, indigo, brand } from './colors';
 
 declare module '@mui/material/styles' {
   interface PaletteOptions {
@@ -40,25 +40,21 @@ declare module '@mui/material/styles' {
 
 const palette: PaletteOptions = {
   neutral: {
-    light: gray[100],
-    main: gray[500],
-    dark: gray[900],
+    lighter: neutral[100],
+    light: neutral[200],
+    main: neutral[300],
+    dark: neutral[400],
+    darker: neutral[500],
   },
   primary: {
-    light: purple[300],
-    main: purple[500],
+    light: brand.secondary.light,
+    main: brand.secondary.default,
+    dark: brand.secondary.dark,
   },
   secondary: {
-    light: skyblue[300],
-    main: skyblue[500],
-    dark: indigo[300],
-  },
-  info: {
-    lighter: white[100],
-    light: white[200],
-    main: white[300],
-    dark: white[400],
-    darker: white[500],
+    light: brand.accent.light,
+    main: brand.accent.default,
+    dark: brand.accent.dark,
   },
   success: {
     main: green[500],
@@ -74,18 +70,18 @@ const palette: PaletteOptions = {
     dark: red[900],
   },
   text: {
-    primary: indigo[500],
-    secondary: gray[900],
-    disabled: gray[500],
+    primary: neutral[900],
+    secondary: neutral[500],
+    disabled: neutral[400],
   },
   gradients: {
     primary: {
-      main: purple[500],
-      state: indigo[300],
+      main: brand.secondary.dark,
+      state: brand.secondary.light,
     },
     secondary: {
-      main: blue[500],
-      state: skyblue[500],
+      main: '#FF0000',// blue[500],
+      state: '#FF00FF',// skyblue[500],
     },
   },
 };

@@ -55,65 +55,66 @@ const columns: GridColDef[] = [
       </Typography>
     ),
   },
-  {
-    field: 'velocity',
-    headerName: 'Vel (mm/s)',
-    editable: false,
-    headerAlign: 'center',
-    align: 'center',
-    flex: 1,
-    minWidth: 100,
-    renderHeader: () => (
-      <Typography variant="body2" color="text.disabled" fontWeight={500}>
-        Vel (mm/s)
-      </Typography>
-    ),
-    renderCell: (params) => (
-      <Typography variant="body2" fontWeight={600}>
-        {params.value ?? '-'}
-      </Typography>
-    ),
-  },
-  {
-    field: 'acceleration',
-    headerName: 'Acc (g)',
-    editable: false,
-    headerAlign: 'center',
-    align: 'center',
-    flex: 1,
-    minWidth: 100,
-    renderHeader: () => (
-      <Typography variant="body2" color="text.disabled" fontWeight={500}>
-        Acc (g)
-      </Typography>
-    ),
-    renderCell: (params) => (
-      <Typography variant="body2" fontWeight={600}>
-        {params.value ?? '-'}
-      </Typography>
-    ),
-  },
-  {
-    field: 'temperature',
-    headerName: 'Temp (°C)',
-    editable: false,
-    headerAlign: 'center',
-    align: 'center',
-    flex: 1,
-    minWidth: 100,
-    renderHeader: () => (
-      <Typography variant="body2" color="text.disabled" fontWeight={500}>
-        Temp (°C)
-      </Typography>
-    ),
-    renderCell: (params) => (
-      <Typography variant="body2" fontWeight={600}>
-        {params.value ?? '-'}
-      </Typography>
-    ),
-  },
+  // {
+  //   field: 'velocity',
+  //   headerName: 'Vel (mm/s)',
+  //   editable: false,
+  //   headerAlign: 'center',
+  //   align: 'center',
+  //   flex: 1,
+  //   minWidth: 100,
+  //   renderHeader: () => (
+  //     <Typography variant="body2" color="text.disabled" fontWeight={500}>
+  //       Vel (mm/s)
+  //     </Typography>
+  //   ),
+  //   renderCell: (params) => (
+  //     <Typography variant="body2" fontWeight={600}>
+  //       {params.value ?? '-'}
+  //     </Typography>
+  //   ),
+  // },
+  // {
+  //   field: 'acceleration',
+  //   headerName: 'Acc (g)',
+  //   editable: false,
+  //   headerAlign: 'center',
+  //   align: 'center',
+  //   flex: 1,
+  //   minWidth: 100,
+  //   renderHeader: () => (
+  //     <Typography variant="body2" color="text.disabled" fontWeight={500}>
+  //       Acc (g)
+  //     </Typography>
+  //   ),
+  //   renderCell: (params) => (
+  //     <Typography variant="body2" fontWeight={600}>
+  //       {params.value ?? '-'}
+  //     </Typography>
+  //   ),
+  // },
+  // {
+  //   field: 'temperature',
+  //   headerName: 'Temp (°C)',
+  //   editable: false,
+  //   headerAlign: 'center',
+  //   align: 'center',
+  //   flex: 1,
+  //   minWidth: 100,
+  //   renderHeader: () => (
+  //     <Typography variant="body2" color="text.disabled" fontWeight={500}>
+  //       Temp (°C)
+  //     </Typography>
+  //   ),
+  //   renderCell: (params) => (
+  //     <Typography variant="body2" fontWeight={600}>
+  //       {params.value ?? '-'}
+  //     </Typography>
+  //   ),
+  // },
   {
     field: 'Action',
+    headerName: '',
     headerAlign: 'right',
     align: 'right',
     editable: false,

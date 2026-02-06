@@ -105,7 +105,7 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
               width: 1,
               height: 6,
               borderRadius: 10,
-              bgcolor: 'info.dark',
+              bgcolor: 'neutral.dark',
               '& .MuiLinearProgress-bar': {
                 borderRadius: 10,
               },

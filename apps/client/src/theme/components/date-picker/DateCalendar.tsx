@@ -31,10 +31,10 @@ const DateCalendar: Components<Omit<Theme, 'components'>>['MuiDateCalendar'] = {
             '& .MuiPickersDay-today': {
               border: 'none',
               color: theme.palette.text.primary,
-              backgroundColor: theme.palette.info.main,
+              backgroundColor: theme.palette.neutral.main,
             },
             '& .MuiPickersDay-today.Mui-selected': {
-              color: theme.palette.info.lighter,
+              color: theme.palette.neutral.lighter,
               backgroundColor: theme.palette.primary.main,
             },
           },

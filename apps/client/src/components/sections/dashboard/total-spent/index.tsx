@@ -20,7 +20,7 @@ const TotalSpent = () => {
           justifyContent="center"
           height={36}
           width={36}
-          bgcolor="info.main"
+          bgcolor="neutral.main"
           borderRadius={2.5}
         >
           <IconifyIcon icon="ic:round-insights" color="primary.main" fontSize="h4.fontSize" />

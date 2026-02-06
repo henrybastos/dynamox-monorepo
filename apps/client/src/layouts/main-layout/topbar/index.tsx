@@ -7,7 +7,6 @@ import ButtonBase from '@mui/material/ButtonBase';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconifyIcon from 'components/base/IconifyIcon';
-import HorizonLogo from 'assets/images/logo-main.png';
 import Image from 'components/base/Image';
 import ProfileMenu from './ProfileMenu';
 import LanguageSelect from './LanguageSelect';
@@ -40,7 +39,7 @@ const Topbar = ({ isClosing, mobileOpen, setMobileOpen }: TopbarProps) => {
           disableRipple
           sx={{ lineHeight: 0, display: { xs: 'none', sm: 'block', lg: 'none' } }}
         >
-          <Image src={HorizonLogo} alt="logo" height={44} width={44} />
+          <Image src={'/images/logo-main.png'} alt="logo" height={44} width={44} />
         </ButtonBase>
 
         <Toolbar sx={{ display: { xm: 'block', lg: 'none' } }}>
