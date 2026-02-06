@@ -31,12 +31,48 @@ export class MachinesService {
     return prisma.machine.update({
       where: { id },
       data,
+      include: { monitoringPoints: { include: { sensor: true } } },
+      // include: { _count: { select: { monitoringPoints: true } } },
     });
   }
 
   async remove(id: number) {
-    return prisma.machine.delete({
-      where: { id },
+    return prisma.$transaction(async (tx) => {
+      // 1. Find all monitoring points for this machine
+      const monitoringPoints = await tx.monitoringPoint.findMany({
+        where: { machineId: id },
+        select: { id: true },
+      });
+
+      const mpIds = monitoringPoints.map((mp) => mp.id);
+
+      // 2. Find all sensors for these monitoring points
+      const sensors = await tx.sensor.findMany({
+        where: { monitoringPointId: { in: mpIds } },
+        select: { id: true },
+      });
+
+      const sensorIds = sensors.map((s) => s.id);
+
+      // 3. Delete Telemetry associated with these sensors
+      await tx.telemetry.deleteMany({
+        where: { sensorId: { in: sensorIds } },
+      });
+
+      // 4. Delete Sensors associated with these monitoring points
+      await tx.sensor.deleteMany({
+        where: { monitoringPointId: { in: mpIds } },
+      });
+
+      // 5. Delete MonitoringPoints associated with this machine
+      await tx.monitoringPoint.deleteMany({
+        where: { machineId: id },
+      });
+
+      // 6. Finally, delete the Machine
+      return tx.machine.delete({
+        where: { id },
+      });
     });
   }
 }

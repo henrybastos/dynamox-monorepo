@@ -12,7 +12,7 @@ const Button: Components<Omit<Theme, 'components'>>['MuiButton'] = {
       textTransform: 'initial',
     }),
     text: ({ theme }) => ({
-      color: theme.palette.text.secondary,
+      color: theme.palette.text.primary,
       backgroundColor: 'transparent !important',
       fontWeight: 500,
     }),

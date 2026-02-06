@@ -53,9 +53,9 @@ const DrawerItems = () => {
         })}
       </List>
 
-      <Box mt="auto" px={3} pt={15} pb={5}>
+      {/* <Box mt="auto" px={3} pt={15} pb={5}>
         <SidebarCard />
-      </Box>
+      </Box> */}
     </>
   );
 };

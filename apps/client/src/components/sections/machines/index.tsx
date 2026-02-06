@@ -8,16 +8,31 @@ import Button from '@mui/material/Button';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconifyIcon from 'components/base/IconifyIcon';
 import MachinesTable from './MachinesTable';
+import AddMachineDialog from './AddMachineDialog';
+import { Machine } from 'store/slices/machinesSlice';
 
 const MachinesSection = () => {
   const [searchText, setSearchText] = useState('');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedMachine, setSelectedMachine] = useState<Machine | null>(null);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
 
-  const handleAddMachine = () => {
-    console.log('Add machine clicked');
+  const handleAddMachineClick = () => {
+    setSelectedMachine(null);
+    setIsDialogOpen(true);
+  };
+
+  const handleEditMachine = (machine: Machine) => {
+    setSelectedMachine(machine);
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    setSelectedMachine(null);
   };
 
   return (
@@ -53,7 +68,7 @@ const MachinesSection = () => {
             variant="contained"
             color="primary"
             startIcon={<IconifyIcon icon="ic:baseline-plus" />}
-            onClick={handleAddMachine}
+            onClick={handleAddMachineClick}
             sx={{ whiteSpace: 'nowrap' }}
           >
             Add Machine
@@ -62,10 +77,17 @@ const MachinesSection = () => {
       </Stack>
 
       <Box mt={1} height={600}>
-        <MachinesTable searchText={searchText} />
+        <MachinesTable searchText={searchText} onEdit={handleEditMachine} />
       </Box>
+
+      <AddMachineDialog
+        open={isDialogOpen}
+        onClose={handleCloseDialog}
+        machine={selectedMachine}
+      />
     </Box>
   );
 };
 
 export default MachinesSection;
+

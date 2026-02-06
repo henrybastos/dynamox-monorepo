@@ -7,6 +7,8 @@ import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import IconifyIcon from 'components/base/IconifyIcon';
+import DeleteMachineDialog from './DeleteMachineDialog';
+import { Machine } from 'store/slices/machinesSlice';
 
 interface Action {
   id: number;
@@ -27,11 +29,18 @@ const actions: Action[] = [
   },
 ];
 
-const MachineActionMenu = () => {
+interface MachineActionMenuProps {
+  machine: Machine;
+  onEdit: (machine: Machine) => void;
+}
+
+const MachineActionMenu = ({ machine, onEdit }: MachineActionMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const open = Boolean(anchorEl);
 
   const handleActionButtonClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
 
@@ -39,9 +48,22 @@ const MachineActionMenu = () => {
     setAnchorEl(null);
   };
 
-  const handleActionItemClick = (title: string) => {
-    console.log(`Action clicked: ${title}`);
+  const handleDeleteOpen = () => {
+    setIsDeleteDialogOpen(true);
     handleActionMenuClose();
+  };
+
+  const handleDeleteClose = () => {
+    setIsDeleteDialogOpen(false);
+  };
+
+  const handleActionItemClick = (title: string) => {
+    if (title === 'Edit') {
+      onEdit(machine);
+      handleActionMenuClose();
+    } else if (title === 'Remove') {
+      handleDeleteOpen();
+    }
   };
 
   return (
@@ -58,7 +80,6 @@ const MachineActionMenu = () => {
         id="machine-action-menu"
         open={open}
         onClose={handleActionMenuClose}
-        onClick={handleActionMenuClose}
         sx={{
           mt: 0.5,
           '& .MuiList-root': {
@@ -86,6 +107,12 @@ const MachineActionMenu = () => {
           );
         })}
       </Menu>
+
+      <DeleteMachineDialog
+        open={isDeleteDialogOpen}
+        onClose={handleDeleteClose}
+        machine={machine}
+      />
     </Box>
   );
 };

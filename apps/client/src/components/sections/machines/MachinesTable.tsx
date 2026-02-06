@@ -6,137 +6,93 @@ import Typography from '@mui/material/Typography';
 import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
 import MachineActionMenu from './MachineActionMenu';
-
-const columns: GridColDef[] = [
-  {
-    field: 'id',
-    headerName: 'ID',
-    editable: false,
-    align: 'left',
-    flex: 1,
-    minWidth: 100,
-    renderHeader: () => (
-      <Typography variant="body2" color="text.disabled" fontWeight={500} ml={1}>
-        ID
-      </Typography>
-    ),
-    renderCell: (params) => (
-      <Stack ml={1} height={1} width={'min-content'} direction="column" alignSelf="center" justifyContent="center">
-        <Typography variant="body2" fontWeight={600}>
-          {params.value}
-        </Typography>
-      </Stack>
-    ),
-  },
-  {
-    field: 'name',
-    headerName: 'Name',
-    editable: false,
-    align: 'left',
-    flex: 2,
-    minWidth: 180,
-    renderHeader: () => (
-      <Typography variant="body2" color="text.disabled" fontWeight={500}>
-        Name
-      </Typography>
-    ),
-  },
-  {
-    field: 'monitoringPointsCount',
-    headerName: 'Spots',
-    editable: false,
-    headerAlign: 'center',
-    align: 'center',
-    flex: 1,
-    minWidth: 80,
-    renderHeader: () => (
-      <Typography variant="body2" color="text.disabled" fontWeight={500}>
-        Spots
-      </Typography>
-    ),
-  },
-  // {
-  //   field: 'velocity',
-  //   headerName: 'Vel (mm/s)',
-  //   editable: false,
-  //   headerAlign: 'center',
-  //   align: 'center',
-  //   flex: 1,
-  //   minWidth: 100,
-  //   renderHeader: () => (
-  //     <Typography variant="body2" color="text.disabled" fontWeight={500}>
-  //       Vel (mm/s)
-  //     </Typography>
-  //   ),
-  //   renderCell: (params) => (
-  //     <Typography variant="body2" fontWeight={600}>
-  //       {params.value ?? '-'}
-  //     </Typography>
-  //   ),
-  // },
-  // {
-  //   field: 'acceleration',
-  //   headerName: 'Acc (g)',
-  //   editable: false,
-  //   headerAlign: 'center',
-  //   align: 'center',
-  //   flex: 1,
-  //   minWidth: 100,
-  //   renderHeader: () => (
-  //     <Typography variant="body2" color="text.disabled" fontWeight={500}>
-  //       Acc (g)
-  //     </Typography>
-  //   ),
-  //   renderCell: (params) => (
-  //     <Typography variant="body2" fontWeight={600}>
-  //       {params.value ?? '-'}
-  //     </Typography>
-  //   ),
-  // },
-  // {
-  //   field: 'temperature',
-  //   headerName: 'Temp (°C)',
-  //   editable: false,
-  //   headerAlign: 'center',
-  //   align: 'center',
-  //   flex: 1,
-  //   minWidth: 100,
-  //   renderHeader: () => (
-  //     <Typography variant="body2" color="text.disabled" fontWeight={500}>
-  //       Temp (°C)
-  //     </Typography>
-  //   ),
-  //   renderCell: (params) => (
-  //     <Typography variant="body2" fontWeight={600}>
-  //       {params.value ?? '-'}
-  //     </Typography>
-  //   ),
-  // },
-  {
-    field: 'Action',
-    headerName: '',
-    headerAlign: 'right',
-    align: 'right',
-    editable: false,
-    sortable: false,
-    flex: 1,
-    minWidth: 80,
-    renderCell: () => <MachineActionMenu />,
-  },
-];
+import { Machine } from 'store/slices/machinesSlice';
 
 interface MachinesTableProps {
   searchText: string;
+  onEdit: (machine: Machine) => void;
 }
 
-const MachinesTable = ({ searchText }: MachinesTableProps) => {
+const MachinesTable = ({ searchText, onEdit }: MachinesTableProps) => {
   const apiRef = useGridApiRef<GridApi>();
   const { items, status } = useSelector((state: RootState) => state.machines);
 
+  const columns: GridColDef[] = useMemo(
+    () => [
+      {
+        field: 'id',
+        headerName: 'ID',
+        editable: false,
+        align: 'left',
+        flex: 1,
+        minWidth: 100,
+        renderHeader: () => (
+          <Typography variant="body2" color="text.disabled" fontWeight={500} ml={1}>
+            ID
+          </Typography>
+        ),
+        renderCell: (params) => (
+          <Stack
+            ml={1}
+            height={1}
+            width={'min-content'}
+            direction="column"
+            alignSelf="center"
+            justifyContent="center"
+          >
+            <Typography variant="body2" fontWeight={600}>
+              {params.value}
+            </Typography>
+          </Stack>
+        ),
+      },
+      {
+        field: 'name',
+        headerName: 'Name',
+        editable: false,
+        align: 'left',
+        flex: 2,
+        minWidth: 180,
+        renderHeader: () => (
+          <Typography variant="body2" color="text.disabled" fontWeight={500}>
+            Name
+          </Typography>
+        ),
+      },
+      {
+        field: 'monitoringPointsCount',
+        headerName: 'Monitoring points',
+        editable: false,
+        headerAlign: 'center',
+        align: 'center',
+        flex: 1,
+        minWidth: 80,
+        renderHeader: () => (
+          <Typography variant="body2" color="text.disabled" fontWeight={500}>
+            Monitoring points
+          </Typography>
+        ),
+      },
+      {
+        field: 'Action',
+        headerName: '',
+        headerAlign: 'right',
+        align: 'right',
+        editable: false,
+        sortable: false,
+        flex: 1,
+        minWidth: 80,
+        renderCell: (params) => (
+          <MachineActionMenu machine={params.row as Machine} onEdit={onEdit} />
+        ),
+      },
+    ],
+    [onEdit],
+  );
+
   const rows = useMemo(() => {
     return items.map((machine) => ({
-      id: machine.id,
-      name: machine.name,
+      ...machine,
       monitoringPointsCount: machine.monitoringPoints?.length || 0,
       velocity: null, // No telemetry in machines list for now
       acceleration: null,

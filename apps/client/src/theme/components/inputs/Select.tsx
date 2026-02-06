@@ -18,7 +18,7 @@ const Select: Components<Omit<Theme, 'components'>>['MuiSelect'] = {
       paddingRight: '0 !important',
       backgroundColor: 'transparent !important',
       fontSize: theme.typography.body2.fontSize,
-      color: theme.palette.text.disabled,
+      color: theme.palette.text.primary,
       fontWeight: 600,
       border: 'none',
     }),

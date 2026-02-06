@@ -25,6 +25,27 @@ export const fetchMachines = createAsyncThunk('machines/fetchMachines', async ()
   return response.data;
 });
 
+export const createMachine = createAsyncThunk(
+  'machines/createMachine',
+  async (data: { name: string; type: string }) => {
+    const response = await api.post('/machines', data);
+    return response.data;
+  },
+);
+
+export const updateMachine = createAsyncThunk(
+  'machines/updateMachine',
+  async ({ id, data }: { id: number; data: { name?: string; type?: string } }) => {
+    const response = await api.patch(`/machines/${id}`, data);
+    return response.data;
+  },
+);
+
+export const deleteMachine = createAsyncThunk('machines/deleteMachine', async (id: number) => {
+  await api.delete(`/machines/${id}`);
+  return id;
+});
+
 const machinesSlice = createSlice({
   name: 'machines',
   initialState,
@@ -41,6 +62,18 @@ const machinesSlice = createSlice({
       .addCase(fetchMachines.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Failed to fetch machines';
+      })
+      .addCase(createMachine.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+      })
+      .addCase(updateMachine.fulfilled, (state, action) => {
+        const index = state.items.findIndex((item) => item.id === action.payload.id);
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
+      })
+      .addCase(deleteMachine.fulfilled, (state, action) => {
+        state.items = state.items.filter((item) => item.id !== action.payload);
       });
   },
 });
