@@ -169,7 +169,6 @@ const MonitoringPointsTable = ({
         pageSizeOptions={[10]}
         paginationModel={{ page: page - 1, pageSize: 10 }}
         onPaginationModelChange={(model) => onPaginationChange(model.page + 1)}
-        disableRowSelectionOnClick
         sx={{
           border: 'none',
           '& .MuiDataGrid-columnHeader': {

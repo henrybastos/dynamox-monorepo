@@ -7,12 +7,15 @@ import { fetchMonitoringPoints, updateTelemetry } from 'store/slices/monitoringP
 import PageTitle from 'components/common/PageTitle';
 import MonitoringPointsTable from 'components/sections/monitoring-points/MonitoringPointsTable';
 import IconifyIcon from 'components/base/IconifyIcon';
+import AddMonitoringPointDialog from 'components/sections/monitoring-points/AddMonitoringPointDialog';
+import { Button } from '@mui/material';
 
 const MonitoringPoints = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { items, total, status } = useSelector((state: RootState) => state.monitoringPoints);
   const [page, setPage] = useState(1);
   const [isConnected, setIsConnected] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchMonitoringPoints({ page }));
@@ -67,25 +70,35 @@ const MonitoringPoints = () => {
               Real-time telemetry from all industrial points
             </Typography>
           </Box>
-          <Paper 
-            elevation={0} 
-            sx={{ 
-                px: 2, 
-                py: 1, 
-                bgcolor: isConnected ? 'success.lighter' : 'error.lighter', 
-                color: isConnected ? 'success.dark' : 'error.dark',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 1,
-                borderRadius: 2,
-                transition: 'all 0.3s ease'
-            }}
-          >
-            <IconifyIcon icon={isConnected ? 'ic:baseline-rss-feed' : 'tabler:wifi-off'} />
-            <Typography variant="subtitle2" fontWeight={600}>
-              {isConnected ? 'Live Connection Active' : 'Disconnected'}
-            </Typography>
-          </Paper>
+          <Stack direction="row" spacing={2} alignItems="center">
+            <Paper 
+              elevation={0} 
+              sx={{ 
+                  px: 2, 
+                  py: 1, 
+                  bgcolor: isConnected ? 'success.lighter' : 'error.lighter', 
+                  color: isConnected ? 'success.dark' : 'error.dark',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1,
+                  borderRadius: 2,
+                  transition: 'all 0.3s ease'
+              }}
+            >
+              <IconifyIcon icon={isConnected ? 'ic:baseline-rss-feed' : 'tabler:wifi-off'} />
+              <Typography variant="subtitle2" fontWeight={600}>
+                {isConnected ? 'Live Connection Active' : 'Disconnected'}
+              </Typography>
+            </Paper>
+            <Button 
+              variant="contained" 
+              startIcon={<IconifyIcon icon="tabler:plus" />}
+              onClick={() => setIsDialogOpen(true)}
+              sx={{ fontWeight: 700 }}
+            >
+              Add Point
+            </Button>
+          </Stack>
         </Stack>
 
         <MonitoringPointsTable 
@@ -94,6 +107,11 @@ const MonitoringPoints = () => {
           total={total}
           page={page}
           onPaginationChange={setPage}
+        />
+
+        <AddMonitoringPointDialog 
+          open={isDialogOpen} 
+          onClose={() => setIsDialogOpen(false)} 
         />
       </Container>
     </>

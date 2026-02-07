@@ -48,6 +48,22 @@ export const fetchMonitoringPoints = createAsyncThunk(
   }
 );
 
+export const createMonitoringPoint = createAsyncThunk(
+  'monitoringPoints/create',
+  async (data: { name: string; machineId: number }) => {
+    const response = await api.post('/monitoring-points', data);
+    return response.data;
+  }
+);
+
+export const associateSensor = createAsyncThunk(
+  'monitoringPoints/associateSensor',
+  async ({ pointId, sensorId, model }: { pointId: number; sensorId: string; model: string }) => {
+    const response = await api.post(`/monitoring-points/${pointId}/sensors`, { id: sensorId, model });
+    return response.data;
+  }
+);
+
 const monitoringPointsSlice = createSlice({
   name: 'monitoringPoints',
   initialState,
@@ -74,6 +90,12 @@ const monitoringPointsSlice = createSlice({
       .addCase(fetchMonitoringPoints.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Failed to fetch monitoring points';
+      })
+      .addCase(createMonitoringPoint.fulfilled, (state, action) => {
+        // Optionally add to items if we want immediate feedback, 
+        // but usually we re-fetch to ensure sorting/pagination is correct.
+        state.items.unshift(action.payload);
+        state.total += 1;
       });
   },
 });

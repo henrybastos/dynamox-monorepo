@@ -2,11 +2,15 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { AuthService } from './app/auth/auth.service';
+import { LoggingInterceptor } from './app/common/interceptors/logging.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
+  
+  // Measure latency for all requests
+  app.useGlobalInterceptors(new LoggingInterceptor());
   
   // Enable CORS for the client application
   app.enableCors({
