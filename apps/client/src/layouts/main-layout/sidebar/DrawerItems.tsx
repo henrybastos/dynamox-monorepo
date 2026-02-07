@@ -26,7 +26,7 @@ const DrawerItems = () => {
         top={0}
         borderBottom={1}
         borderColor="neutral.main"
-        bgcolor="neutral.lighter"
+        bgcolor="neutral.lightest"
         zIndex={1000}
       >
         <ButtonBase component={Link} href="/" disableRipple>

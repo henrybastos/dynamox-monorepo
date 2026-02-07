@@ -39,12 +39,6 @@ const sitemap: MenuItem[] = [
     path: paths.monitoringPoints,
     icon: 'tabler:current-location',
   },
-  {
-    id: 4,
-    subheader: 'Sensors',
-    path: '#!',
-    icon: 'tabler:object-scan',
-  },
 ];
 
 export default sitemap;

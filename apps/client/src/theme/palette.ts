@@ -1,9 +1,10 @@
 import { PaletteColorOptions, PaletteOptions } from '@mui/material/styles';
 import { neutral, red, green, blue, yellow, skyblue, purple, indigo, brand } from './colors';
+import { UnionType } from 'typescript';
 
 declare module '@mui/material/styles' {
   interface PaletteOptions {
-    neutral?: PaletteColorOptions;
+    neutral?: PaletteColorOptions | PaletteColor;
     transparent?: {
       success: PaletteColorOptions;
       warning: PaletteColorOptions;
@@ -32,19 +33,27 @@ declare module '@mui/material/styles' {
     };
   }
   interface PaletteColor {
-    lighter: string;
-    darker: string;
+    lightest?: string;
+    lighter?: string;
+    light: string;
+    main: string;
     state: string;
+    dark: string;
+    darker?: string;
+    darkest?: string;
   }
 }
 
+
 const palette: PaletteOptions = {
   neutral: {
+    lightest: neutral[50],
     lighter: neutral[100],
     light: neutral[200],
     main: neutral[300],
     dark: neutral[400],
     darker: neutral[500],
+    darkest: neutral[600],
   },
   primary: {
     light: brand.secondary.light,

@@ -1,4 +1,7 @@
 import 'dotenv/config';
+(BigInt.prototype as any).toJSON = function () {
+  return this.toString();
+};
 import { PrismaClient } from '@prisma/client'
 import Redis from 'ioredis';
 import * as amqp from 'amqplib';

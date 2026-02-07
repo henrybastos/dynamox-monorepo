@@ -19,7 +19,7 @@ const Drawer: Components<Omit<Theme, 'components'>>['MuiDrawer'] = {
       height: '100vh',
       border: 0,
       borderRadius: 0,
-      backgroundColor: theme.palette.neutral.lighter,
+      backgroundColor: theme.palette.neutral.lightest,
       boxShadow: 'none',
       boxSizing: 'border-box',
     }),
