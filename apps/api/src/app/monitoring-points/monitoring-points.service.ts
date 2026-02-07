@@ -3,14 +3,24 @@ import { prisma, MachineType, SensorModel } from '@source/persistence';
 
 @Injectable()
 export class MonitoringPointsService {
-  async findAll(page = 1, limit = 5, sortBy = 'name', sortOrder: 'asc' | 'desc' = 'asc') {
+  async findAll(page = 1, limit = 10, sortBy = 'name', sortOrder: 'asc' | 'desc' = 'asc') {
     const skip = (page - 1) * limit;
     const [items, total] = await Promise.all([
       prisma.monitoringPoint.findMany({
         skip,
         take: limit,
         orderBy: { [sortBy]: sortOrder },
-        include: { machine: true, sensor: true },
+        include: { 
+          machine: true, 
+          sensor: {
+            include: {
+              telemetry: {
+                orderBy: { timestamp: 'desc' },
+                take: 1
+              }
+            }
+          }
+        },
       }),
       prisma.monitoringPoint.count(),
     ]);

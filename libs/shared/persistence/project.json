@@ -12,7 +12,10 @@
         "outputPath": "dist/libs/shared/persistence",
         "main": "libs/shared/persistence/src/index.ts",
         "tsConfig": "libs/shared/persistence/tsconfig.lib.json",
-        "assets": ["libs/shared/persistence/*.md"]
+        "assets": [
+          "libs/shared/persistence/*.md",
+          "libs/shared/persistence/prisma/schema.prisma"
+        ]
       }
     }
   }

@@ -1,4 +1,5 @@
 import * as amqp from 'amqplib';
+import { prisma } from '@source/persistence';
 
 const RABBITMQ_URL = process.env['RABBITMQ_URL'] || 'amqp://localhost:5672';
 const QUEUE = 'telemetry_queue';
@@ -10,7 +11,18 @@ async function simulate() {
 
     await channel.assertQueue(QUEUE, { durable: true });
 
-    const sensors = ['sensor_hf_01', 'sensor_tcag_01'];
+    // Fetch existing sensor IDs from the database
+    const dbSensors = await prisma.sensor.findMany({
+      select: { id: true }
+    });
+
+    if (dbSensors.length === 0) {
+      console.error('No sensors found in database. Please create some sensors first.');
+      process.exit(1);
+    }
+
+    const sensors = dbSensors.map(s => s.id);
+    console.log(`Simulator started with ${sensors.length} real sensors.`);
 
     console.log('Simulator started. Sending data every 2 seconds...');
 

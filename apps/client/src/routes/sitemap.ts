@@ -36,7 +36,7 @@ const sitemap: MenuItem[] = [
   {
     id: 3,
     subheader: 'Monitoring Points',
-    path: '#!',
+    path: paths.monitoringPoints,
     icon: 'tabler:current-location',
   },
   {

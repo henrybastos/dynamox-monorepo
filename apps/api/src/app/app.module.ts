@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { MachinesModule } from './machines/machines.module';
 import { MonitoringPointsModule } from './monitoring-points/monitoring-points.module';
 import { TelemetryModule } from './telemetry/telemetry.module';
+import { RealTimeModule } from './real-time/real-time.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { TelemetryModule } from './telemetry/telemetry.module';
     MachinesModule,
     MonitoringPointsModule,
     TelemetryModule,
+    RealTimeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

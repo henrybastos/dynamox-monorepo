@@ -11,14 +11,16 @@
       "options": {
         "platform": "node",
         "outputPath": "dist/apps/simulator",
-        "format": ["cjs"],
-        "bundle": false,
+        "format": ["esm"],
+        "bundle": true,
+        "thirdParty": false,
         "main": "apps/simulator/src/main.ts",
         "tsConfig": "apps/simulator/tsconfig.app.json",
         "assets": ["apps/simulator/src/assets"],
         "generatePackageJson": true,
         "esbuildOptions": {
           "sourcemap": true,
+          "external": ["@prisma/*", "@prisma/client-runtime-utils", "amqplib", "ioredis"],
           "outExtension": {
             ".js": ".js"
           }

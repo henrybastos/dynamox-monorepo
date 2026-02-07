@@ -16,7 +16,17 @@ export class AppService {
     console.log(`Processing telemetry for sensor ${sensorId}: A:${accelerationValue} V:${velocityValue} T:${temperatureValue}`);
 
     try {
-      // 1. Store in PostgreSQL
+      // 1. Validate if sensor exists (avoid FK violation)
+      const sensorExists = await prisma.sensor.findUnique({
+        where: { id: sensorId },
+      });
+
+      if (!sensorExists) {
+        console.warn(`[Worker] Received telemetry for non-existent sensor: ${sensorId}. Ignoring.`);
+        return;
+      }
+
+      // 2. Store in PostgreSQL
       await prisma.telemetry.create({
         data: {
           sensorId,
@@ -39,14 +49,19 @@ export class AppService {
       });
 
       // 4. Update Stream (List/Stream for real-time charts)
-      await redis.lpush(`telemetry:sensor:${sensorId}:stream`, JSON.stringify({ 
+      const updatePayload = { 
+        sensorId,
         accelerationValue, 
         velocityValue, 
         temperatureValue, 
         timestamp 
-      }));
+      };
+      
+      await redis.lpush(`telemetry:sensor:${sensorId}:stream`, JSON.stringify(updatePayload));
       await redis.ltrim(`telemetry:sensor:${sensorId}:stream`, 0, 999); // Keep last 1000 points
 
+      // 5. Publish to Redis Pub/Sub for Real-Time UI
+      await redis.publish('telemetry.updates', JSON.stringify(updatePayload));
     } catch (error) {
       console.error('Error processing telemetry:', error);
     }
