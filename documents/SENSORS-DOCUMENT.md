@@ -17,7 +17,7 @@ Here is the formatted technical documentation for the DynaLogger sensors, optimi
 
 ---
 
-### **General Technical neutralrmation**
+### **General Technical information**
 
 * **Temperature Monitoring**: All sensors feature a resolution of 0.01°C for contact temperature.
 * **Memory Capacity**: Devices have adjustable memory for up to 51,200 samples.

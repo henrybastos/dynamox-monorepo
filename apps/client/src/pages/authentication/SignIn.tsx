@@ -25,7 +25,7 @@ const signInSchema = z.object({
   password: z.string().min(8, 'Password must be at least 8 characters'),
 });
 
-type SignneutralrmData = z.infer<typeof signInSchema>;
+type SignInFormData = z.infer<typeof signInSchema>;
 
 const SignInView = () => {
   const { status } = useSession();
@@ -37,7 +37,7 @@ const SignInView = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<SignneutralrmData>({
+  } = useForm<SignInFormData>({
     resolver: zodResolver(signInSchema),
   });
 
@@ -47,7 +47,7 @@ const SignInView = () => {
     }
   }, [status, navigate]);
 
-  const onSubmit = async (data: SignneutralrmData) => {
+  const onSubmit = async (data: SignInFormData) => {
     setError(null);
 
     const result = await signIn('credentials', {

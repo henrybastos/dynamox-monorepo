@@ -14,31 +14,47 @@ const MonitoringPoints = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { items, total, status } = useSelector((state: RootState) => state.monitoringPoints);
   const [page, setPage] = useState(1);
-  const [isConnected, setIsConnected] = useState(false);
+  const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'reconnecting' | 'failed'>('disconnected');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [socketInstance, setSocketInstance] = useState<Socket | null>(null);
 
-  useEffect(() => {
-    dispatch(fetchMonitoringPoints({ page }));
-  }, [dispatch, page]);
-
-  useEffect(() => {
-    // Connect to Socket.io server
+  const connectSocket = () => {
     const socket: Socket = io('http://localhost:3000', {
       transports: ['websocket'],
+      reconnectionDelay: 3000,
+      reconnectionAttempts: 5,
     });
+
+    setSocketInstance(socket);
 
     socket.on('connect', () => {
       console.log('Connected to Telemetry WebSocket');
-      setIsConnected(true);
+      setConnectionStatus('connected');
     });
 
-    socket.on('disconnect', () => {
-      console.log('Disconnected from Telemetry WebSocket');
-      setIsConnected(false);
+    socket.on('disconnect', (reason) => {
+      console.log('Disconnected from Telemetry WebSocket:', reason);
+      if (reason === 'io server disconnect' || reason === 'io client disconnect') {
+         setConnectionStatus('disconnected');
+      } else {
+         setConnectionStatus('reconnecting');
+      }
+    });
+
+    socket.on('connect_error', (data) => {
+      console.warn('Failed to connect', data);
+      // Socket.io will automatically try to reconnect if reconnection is true (default)
+    });
+
+    socket.io.on('reconnect_attempt', (attempt) => {
+       setConnectionStatus('reconnecting');
+    });
+
+    socket.io.on('reconnect_failed', () => {
+       setConnectionStatus('failed');
     });
 
     socket.on('telemetry_update', (data) => {
-      // Dispatch update to Redux
       dispatch(updateTelemetry({
         sensorId: data.sensorId,
         telemetry: {
@@ -50,12 +66,25 @@ const MonitoringPoints = () => {
       }));
     });
 
+    return socket;
+  };
+
+  const manualSocketRetry = () => {
+    socketInstance?.connect();
+    setConnectionStatus('reconnecting');
+  }
+
+  useEffect(() => {
     dispatch(fetchMonitoringPoints({ page }));
+  }, [dispatch, page]);
+
+  useEffect(() => {
+    const socket = connectSocket();
 
     return () => {
       socket.disconnect();
     };
-  }, [dispatch]);
+  }, []); // Only once on mount
 
   return (
     <>
@@ -76,8 +105,14 @@ const MonitoringPoints = () => {
               sx={{ 
                   px: 2, 
                   py: 1, 
-                  bgcolor: isConnected ? 'success.lighter' : 'error.lighter', 
-                  color: isConnected ? 'success.dark' : 'error.dark',
+                  bgcolor: 
+                    connectionStatus === 'connected' ? 'success.lighter' :
+                    connectionStatus === 'reconnecting' ? 'warning.lighter' :
+                    connectionStatus === 'failed' ? 'error.lighter' : 'neutral.lighter',
+                  color: 
+                    connectionStatus === 'connected' ? 'success.dark' :
+                    connectionStatus === 'reconnecting' ? 'warning.dark' :
+                    connectionStatus === 'failed' ? 'error.dark' : 'neutral.dark',
                   display: 'flex',
                   alignItems: 'center',
                   gap: 1,
@@ -85,11 +120,40 @@ const MonitoringPoints = () => {
                   transition: 'all 0.3s ease'
               }}
             >
-              <IconifyIcon icon={isConnected ? 'ic:baseline-rss-feed' : 'tabler:wifi-off'} />
+              <IconifyIcon 
+                icon={
+                  connectionStatus === 'connected' ? 'ic:baseline-rss-feed' :
+                  connectionStatus === 'reconnecting' ? 'tabler:loader-2' :
+                  connectionStatus === 'failed' ? 'tabler:alert-circle' : 'tabler:wifi-off'
+                } 
+                sx={{ 
+                  animation: connectionStatus === 'reconnecting' ? 'spin 2s linear infinite' : 'none',
+                  '@keyframes spin': {
+                    '0%': { transform: 'rotate(0deg)' },
+                    '100%': { transform: 'rotate(360deg)' }
+                  }
+                }}
+              />
               <Typography variant="subtitle2" fontWeight={600}>
-                {isConnected ? 'Live Connection Active' : 'Disconnected'}
+                {connectionStatus === 'connected' ? 'Live Connection Active' :
+                 connectionStatus === 'reconnecting' ? 'Reconnecting...' :
+                 connectionStatus === 'failed' ? 'Connection Failed' : 'Disconnected'}
               </Typography>
             </Paper>
+
+            {connectionStatus === 'failed' && (
+              <Button
+                variant="outlined"
+                color="error"
+                size="small"
+                startIcon={<IconifyIcon icon="tabler:refresh" />}
+                onClick={() => manualSocketRetry()}
+                sx={{ fontWeight: 700, backgroundColor: 'error.main' }}
+              >
+                Retry
+              </Button>
+            )}
+
             <Button 
               variant="contained" 
               startIcon={<IconifyIcon icon="tabler:plus" />}
