@@ -51,7 +51,7 @@ model MonitoringPoint {
 }
 
 model Sensor {
-  id                String          @id
+  id                String          @id @default(uuid())
   model             SensorModel
   monitoringPointId Int             @unique @map("monitoring_point_id")
   monitoringPoint   MonitoringPoint @relation(fields: [monitoringPointId], references: [id])

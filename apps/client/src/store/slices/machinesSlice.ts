@@ -1,11 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from 'api/api';
 
+export interface Sensor {
+  id?: string;
+  model: string;
+}
+
+export interface MonitoringPoint {
+  id?: number;
+  name: string;
+  sensor?: Sensor;
+}
+
 export interface Machine {
   id: number;
   name: string;
   type: string;
-  monitoringPoints: any[];
+  monitoringPoints: MonitoringPoint[];
 }
 
 interface MachinesState {
@@ -27,7 +38,7 @@ export const fetchMachines = createAsyncThunk('machines/fetchMachines', async ()
 
 export const createMachine = createAsyncThunk(
   'machines/createMachine',
-  async (data: { name: string; type: string }) => {
+  async (data: { name: string; type: string; monitoringPoints: MonitoringPoint[] }) => {
     const response = await api.post('/machines', data);
     return response.data;
   },
@@ -35,7 +46,7 @@ export const createMachine = createAsyncThunk(
 
 export const updateMachine = createAsyncThunk(
   'machines/updateMachine',
-  async ({ id, data }: { id: number; data: { name?: string; type?: string } }) => {
+  async ({ id, data }: { id: number; data: { name?: string; type?: string; monitoringPoints?: MonitoringPoint[] } }) => {
     const response = await api.patch(`/machines/${id}`, data);
     return response.data;
   },

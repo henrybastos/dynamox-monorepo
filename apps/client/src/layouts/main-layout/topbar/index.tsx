@@ -53,34 +53,19 @@ const Topbar = ({ isClosing, mobileOpen, setMobileOpen }: TopbarProps) => {
             <IconifyIcon icon="ic:baseline-menu" />
           </IconButton>
         </Toolbar>
-
-        <Toolbar sx={{ display: { xm: 'block', md: 'none' } }}>
-          <IconButton size="large" edge="start" color="inherit" aria-label="search">
-            <IconifyIcon icon="bx:search" />
-          </IconButton>
-        </Toolbar>
-
-        <TextField
-          variant="filled"
-          placeholder="Search"
-          sx={{ width: 320, display: { xs: 'none', md: 'flex' } }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconifyIcon icon="bx:search" />
-              </InputAdornment>
-            ),
-          }}
-        />
       </Stack>
 
       <Stack spacing={{ xs: 1.5, sm: 2 }} alignItems="center">
-        <LanguageSelect />
-        <IconButton size="large">
+        {/* TODO(POC_I18N): Changing some text language for internationalization */}
+        {/* <LanguageSelect /> */}
+        
+        {/* TODO(POC_NOTIFICATION): Special warnings as a notification system */}
+        {/* <IconButton size="large">
           <Badge color="error" variant="dot">
             <IconifyIcon icon="ic:baseline-notifications-none" />
           </Badge>
-        </IconButton>
+        </IconButton> */}
+        
         <ProfileMenu />
       </Stack>
     </Stack>

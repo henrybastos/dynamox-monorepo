@@ -19,12 +19,12 @@ export class MachinesController {
   }
 
   @Post()
-  async create(@Body() body: { name: string; type: MachineType }) {
+  async create(@Body() body: any) {
     return this.machinesService.create(body);
   }
 
   @Patch(':id')
-  async update(@Param('id', ParseIntPipe) id: number, @Body() body: { name?: string; type?: MachineType }) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() body: any) {
     return this.machinesService.update(id, body);
   }
 

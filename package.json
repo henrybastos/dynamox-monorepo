@@ -11,8 +11,9 @@
     "build:api": "pnpm exec nx build api",
     "build:worker": "pnpm exec nx build worker",
     "build:simulator": "pnpm exec nx build simulator",
-    "prisma:push": "pnpm exec prisma db push",
     "prisma:generate": "pnpm exec prisma generate",
+    "prisma:migrate": "pnpm exec prisma migrate",
+    "prisma:push": "pnpm exec prisma db push",
     "prisma:seed": "pnpm exec prisma db seed",
     "tscheck:worker": "pnpm exec tsc --noEmit -p apps/worker/tsconfig.app.json",
     "tscheck:all": "pnpm exec tsc --noEmit"

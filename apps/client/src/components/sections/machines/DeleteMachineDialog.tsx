@@ -75,7 +75,7 @@ const DeleteMachineDialog = ({ open, onClose, machine }: DeleteMachineDialogProp
             </ul>
           </Alert>
           
-          <Typography variant="caption" color="text.secondary">
+          <Typography variant="caption" color="error.main">
             This operation cannot be undone.
           </Typography>
         </Stack>

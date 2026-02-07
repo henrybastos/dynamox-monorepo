@@ -28,7 +28,7 @@ export class AuthService {
   // Helper to create a default user if none exists (for dev/fixed credentials)
   async ensureDefaultUser() {
     const defaultEmail = 'admin@dynamox.com';
-    const defaultPassword = 'admin';
+    const defaultPassword = 'admin1234';
     
     const user = await prisma.user.findUnique({ where: { email: defaultEmail } });
     if (!user) {

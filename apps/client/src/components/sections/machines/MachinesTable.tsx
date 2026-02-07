@@ -7,11 +7,18 @@ import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
 import MachineActionMenu from './MachineActionMenu';
 import { Machine } from 'store/slices/machinesSlice';
+import { Box, Container } from '@mui/material';
 
 interface MachinesTableProps {
   searchText: string;
   onEdit: (machine: Machine) => void;
 }
+
+const TableNoRowsOverlay = () => (
+  <Container sx={{ display: 'grid', placeItems: 'center',height: '100%' }}>
+    <Typography sx={{ width: 'fit-content', color: 'text.secondary' }}>No machines found</Typography>
+  </Container>
+)
 
 const MachinesTable = ({ searchText, onEdit }: MachinesTableProps) => {
   const apiRef = useGridApiRef<GridApi>();
@@ -27,7 +34,7 @@ const MachinesTable = ({ searchText, onEdit }: MachinesTableProps) => {
         flex: 1,
         minWidth: 100,
         renderHeader: () => (
-          <Typography variant="body2" color="text.disabled" fontWeight={500} ml={1}>
+          <Typography variant="body2" color="text.secondary" fontWeight={500} ml={1} bgcolor={'transparent'}>
             ID
           </Typography>
         ),
@@ -54,7 +61,7 @@ const MachinesTable = ({ searchText, onEdit }: MachinesTableProps) => {
         flex: 2,
         minWidth: 180,
         renderHeader: () => (
-          <Typography variant="body2" color="text.disabled" fontWeight={500}>
+          <Typography variant="body2" color="text.secondary" fontWeight={500}>
             Name
           </Typography>
         ),
@@ -68,7 +75,7 @@ const MachinesTable = ({ searchText, onEdit }: MachinesTableProps) => {
         flex: 1,
         minWidth: 80,
         renderHeader: () => (
-          <Typography variant="body2" color="text.disabled" fontWeight={500}>
+          <Typography variant="body2" color="text.secondary" fontWeight={500}>
             Monitoring points
           </Typography>
         ),
@@ -110,6 +117,7 @@ const MachinesTable = ({ searchText, onEdit }: MachinesTableProps) => {
       loading={status === 'loading'}
       density="standard"
       columns={columns}
+      sx={{ '& .MuiDataGrid-columnHeader ': { backgroundColor: 'neutral.lighter' } }}
       rows={rows}
       rowHeight={52}
       disableColumnResize
@@ -127,6 +135,7 @@ const MachinesTable = ({ searchText, onEdit }: MachinesTableProps) => {
       }}
       slots={{
         pagination: DataGridFooter,
+        noRowsOverlay: TableNoRowsOverlay,
       }}
       pageSizeOptions={[10, 20]}
     />
