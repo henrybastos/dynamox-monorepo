@@ -30,6 +30,13 @@ const MonitoringPointsTable = ({
           ID
         </Typography>
       ),
+      renderCell: (params) => (
+        <Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+          <Typography variant="body2" color="text.disabled" sx={{ fontWeight: 500 }}>
+            {params.value}
+          </Typography>
+        </Box>
+      ),
     },
     {
       field: 'name',
@@ -62,7 +69,7 @@ const MonitoringPointsTable = ({
       valueGetter: (value, row: MonitoringPoint) => row.sensor?.id || 'None',
       renderHeader: () => (
         <Typography variant="body2" color="text.secondary" fontWeight={500}>
-          Sensor
+          Sensor ID
         </Typography>
       ),
     },
@@ -78,7 +85,7 @@ const MonitoringPointsTable = ({
           size="small" 
           variant="outlined" 
           color="primary"
-          sx={{ fontWeight: 600 }}
+          sx={{ fontWeight: 600, backgroundColor: 'primary.main', minWidth: '4rem' }}
         />
       ),
       renderHeader: () => (
@@ -94,9 +101,11 @@ const MonitoringPointsTable = ({
       minWidth: 100,
       valueGetter: (value, row: MonitoringPoint) => row.sensor?.telemetry?.[0]?.accelerationValue ?? '-',
       renderCell: (params) => (
-        <Typography variant="body2" sx={{ fontWeight: 700, color: 'primary.main' }}>
-          {typeof params.value === 'number' ? params.value.toFixed(2) : params.value}
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+          <Typography variant="body2" sx={{ fontWeight: 700, color: 'primary.main' }}>
+            {typeof params.value === 'number' ? params.value.toFixed(2) : params.value}
+          </Typography>
+        </Box>
       ),
       renderHeader: () => (
         <Typography variant="body2" color="text.secondary" fontWeight={500}>
@@ -111,9 +120,11 @@ const MonitoringPointsTable = ({
       minWidth: 100,
       valueGetter: (value, row: MonitoringPoint) => row.sensor?.telemetry?.[0]?.velocityValue ?? '-',
       renderCell: (params) => (
-        <Typography variant="body2" sx={{ fontWeight: 700, color: 'secondary.main' }}>
-          {typeof params.value === 'number' ? params.value.toFixed(2) : params.value}
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+          <Typography variant="body2" sx={{ fontWeight: 700, color: 'secondary.main' }}>
+            {typeof params.value === 'number' ? params.value.toFixed(2) : params.value}
+          </Typography>
+        </Box>
       ),
       renderHeader: () => (
         <Typography variant="body2" color="text.secondary" fontWeight={500}>
@@ -128,9 +139,11 @@ const MonitoringPointsTable = ({
       minWidth: 100,
       valueGetter: (value, row: MonitoringPoint) => row.sensor?.telemetry?.[0]?.temperatureValue ?? '-',
       renderCell: (params) => (
-        <Typography variant="body2" sx={{ fontWeight: 700, color: 'error.main' }}>
-          {typeof params.value === 'number' ? params.value.toFixed(1) : params.value}
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+          <Typography variant="body2" sx={{ fontWeight: 700, color: 'error.main' }}>
+            {typeof params.value === 'number' ? params.value.toFixed(1) : params.value}
+          </Typography>
+        </Box>
       ),
       renderHeader: () => (
         <Typography variant="body2" color="text.secondary" fontWeight={500}>
@@ -149,6 +162,10 @@ const MonitoringPointsTable = ({
         pagination
         paginationMode="server"
         rowCount={total}
+        disableColumnResize
+        disableColumnMenu
+        disableColumnSelector
+        disableRowSelectionOnClick
         pageSizeOptions={[10]}
         paginationModel={{ page: page - 1, pageSize: 10 }}
         onPaginationModelChange={(model) => onPaginationChange(model.page + 1)}
@@ -160,7 +177,7 @@ const MonitoringPointsTable = ({
           },
           '& .MuiDataGrid-cell': {
             borderBottom: '1px solid',
-            borderColor: 'neutral.100',
+            borderColor: 'neutral.light',
           },
           '& .MuiDataGrid-footerContainer': {
             borderTop: 'none',

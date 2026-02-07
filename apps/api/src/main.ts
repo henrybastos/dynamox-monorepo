@@ -17,8 +17,8 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
 
   // Seed default user
-  const authService = app.get(AuthService);
-  await authService.ensureDefaultUser();
+  // const authService = app.get(AuthService);
+  // await authService.ensureDefaultUser();
 
   await app.listen(port);
   Logger.log(

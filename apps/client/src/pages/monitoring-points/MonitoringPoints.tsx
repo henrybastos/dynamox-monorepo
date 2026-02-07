@@ -12,6 +12,7 @@ const MonitoringPoints = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { items, total, status } = useSelector((state: RootState) => state.monitoringPoints);
   const [page, setPage] = useState(1);
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     dispatch(fetchMonitoringPoints({ page }));
@@ -25,6 +26,12 @@ const MonitoringPoints = () => {
 
     socket.on('connect', () => {
       console.log('Connected to Telemetry WebSocket');
+      setIsConnected(true);
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Disconnected from Telemetry WebSocket');
+      setIsConnected(false);
     });
 
     socket.on('telemetry_update', (data) => {
@@ -39,6 +46,8 @@ const MonitoringPoints = () => {
         }
       }));
     });
+
+    dispatch(fetchMonitoringPoints({ page }));
 
     return () => {
       socket.disconnect();
@@ -63,17 +72,18 @@ const MonitoringPoints = () => {
             sx={{ 
                 px: 2, 
                 py: 1, 
-                bgcolor: 'success.lighter', 
-                color: 'success.dark',
+                bgcolor: isConnected ? 'success.lighter' : 'error.lighter', 
+                color: isConnected ? 'success.dark' : 'error.dark',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 1,
-                borderRadius: 2
+                borderRadius: 2,
+                transition: 'all 0.3s ease'
             }}
           >
-            <IconifyIcon icon="ic:baseline-rss-feed" />
+            <IconifyIcon icon={isConnected ? 'ic:baseline-rss-feed' : 'tabler:wifi-off'} />
             <Typography variant="subtitle2" fontWeight={600}>
-              Live Connection Active
+              {isConnected ? 'Live Connection Active' : 'Disconnected'}
             </Typography>
           </Paper>
         </Stack>

@@ -20,6 +20,7 @@ export class AuthController {
   @Post('logout')
   @UseGuards(JwtAuthGuard)
   async logout(@Req() req: Request, @Res() res: Response) {
+    // TODO:
     // 1. Extract token and add to Redis blacklist (optional for now)
     // 2. Clear the HttpOnly cookie
     res.setHeader('Set-Cookie', 'access_token=; HttpOnly; Path=/; Max-Age=0');

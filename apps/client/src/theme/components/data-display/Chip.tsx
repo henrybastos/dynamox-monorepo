@@ -6,7 +6,7 @@ const Chip: Components<Omit<Theme, 'components'>>['MuiChip'] = {
     root: ({ theme }) => ({
       margin: 0,
       fontWeight: 700,
-      color: theme.palette.neutral.lighter,
+      color: theme.palette.neutral.lightest,
     }),
     sizeSmall: ({ theme }) => ({
       height: 24,
