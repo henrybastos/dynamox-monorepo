@@ -42,10 +42,10 @@ Thumbs.db
 .nx/workspace-data
 
 # prisma
-*/**/prisma/generated
+**/prisma/generated
 
 # enviroment variables
-.env
+**/.env
 
 # Next.js
 .next

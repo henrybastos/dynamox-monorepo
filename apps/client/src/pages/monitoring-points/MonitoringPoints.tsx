@@ -143,12 +143,12 @@ const MonitoringPoints = () => {
 
             {connectionStatus === 'failed' && (
               <Button
-                variant="outlined"
+                variant="contained"
                 color="error"
                 size="small"
                 startIcon={<IconifyIcon icon="tabler:refresh" />}
                 onClick={() => manualSocketRetry()}
-                sx={{ fontWeight: 700, backgroundColor: 'error.main' }}
+                sx={{ fontWeight: 700 }}
               >
                 Retry
               </Button>

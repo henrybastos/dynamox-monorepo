@@ -26,6 +26,11 @@ const Button: Components<Omit<Theme, 'components'>>['MuiButton'] = {
       backgroundColor: theme.palette.neutral.dark,
       '&:hover': { backgroundColor: theme.palette.neutral.dark },
     }),
+    containedError: ({ theme }) => ({
+      color: theme.palette.neutral.light,
+      backgroundColor: theme.palette.error.main,
+      '&:hover': { backgroundColor: theme.palette.error.dark },
+    }),
     sizeLarge: ({ theme }) => ({
       padding: theme.spacing(1.25, 3),
       fontSize: theme.typography.body1.fontSize,
