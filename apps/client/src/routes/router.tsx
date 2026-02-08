@@ -8,6 +8,7 @@ const AuthLayout = lazy(() => import('layouts/auth-layout'));
 const Dashboard = lazy(() => import('pages/dashboard/Dashboard'));
 const Machines = lazy(() => import('pages/machines/Machines'));
 const MonitoringPoints = lazy(() => import('pages/monitoring-points/MonitoringPoints'));
+const Telemetry = lazy(() => import('pages/telemetry/Telemetry'));
 const SignIn = lazy(() => import('pages/authentication/SignIn'));
 const SignUp = lazy(() => import('pages/authentication/SignUp'));
 const Page404 = lazy(() => import('pages/errors/Page404'));
@@ -44,6 +45,10 @@ export const routes = [
           {
             path: paths.monitoringPoints,
             element: <MonitoringPoints />,
+          },
+          {
+            path: paths.telemetry,
+            element: <Telemetry />,
           },
         ],
       },

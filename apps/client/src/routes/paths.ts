@@ -9,4 +9,5 @@ export default {
   signup: `/${rootPaths.authRoot}/sign-up`,
   machines: '/machines',
   monitoringPoints: '/monitoring-points',
+  telemetry: '/telemetry',
 };

@@ -16,6 +16,10 @@ export const prisma = new PrismaClient({ adapter });
 // Redis Client
 export const redis = new Redis(process.env['REDIS_URL'] || 'redis://localhost:6379');
 
+redis.on('error', (err) => {
+  console.warn('Redis connection error:', err.message);
+});
+
 // RabbitMQ Utils
 export async function createRabbitMQConnection() {
   const connection = await amqp.connect(process.env['RABBITMQ_URL'] || 'amqp://localhost:5672');

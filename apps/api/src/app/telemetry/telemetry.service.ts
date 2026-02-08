@@ -18,4 +18,31 @@ export class TelemetryService {
       take: 100, // Return last 100 points
     });
   }
+
+  async findAll(page = 1, limit = 10) {
+    const skip = (page - 1) * limit;
+    const [items, total] = await Promise.all([
+      prisma.telemetry.findMany({
+        skip,
+        take: limit,
+        orderBy: { timestamp: 'desc' },
+        include: {
+          sensor: {
+            include: {
+              monitoringPoint: true,
+            },
+          },
+        },
+      }),
+      prisma.telemetry.count(),
+    ]);
+
+    return { items, total, page, limit };
+  }
+
+  async deleteOne(id: number) {
+    return prisma.telemetry.delete({
+      where: { id },
+    });
+  }
 }

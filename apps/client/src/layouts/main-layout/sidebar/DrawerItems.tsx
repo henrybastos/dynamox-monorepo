@@ -30,15 +30,7 @@ const DrawerItems = () => {
         zIndex={1000}
       >
         <ButtonBase component={Link} href="/" disableRipple>
-          <Image src={'/images/logo-main.png'} alt="logo" height={44} width={44} sx={{ mr: 1.75 }} />
-          <Typography
-            variant="h3"
-            textTransform="uppercase"
-            letterSpacing={1}
-            fontFamily={fontFamily.Poppins}
-          >
-            Horizon
-          </Typography>
+          <Image src={'/images/dynamox-wordmark.webp'} alt="logo" sx={{ mr: 1.75, width: '100%', maxHeight: '48px' }} />
         </ButtonBase>
       </Stack>
 

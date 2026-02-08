@@ -24,7 +24,7 @@ const MonitoringPointsTable = ({
       field: 'id',
       headerName: 'ID',
       flex: 0.5,
-      minWidth: 70,
+      minWidth: 60,
       renderHeader: () => (
         <Typography variant="body2" color="text.secondary" fontWeight={500}>
           ID
@@ -62,14 +62,14 @@ const MonitoringPointsTable = ({
       ),
     },
     {
-      field: 'sensorId',
-      headerName: 'Sensor ID',
+      field: 'machineType',
+      headerName: 'Machine Type',
       flex: 1.5,
       minWidth: 150,
-      valueGetter: (value, row: MonitoringPoint) => row.sensor?.id || 'None',
+      valueGetter: (value, row: MonitoringPoint) => row.machine?.type || '-',
       renderHeader: () => (
         <Typography variant="body2" color="text.secondary" fontWeight={500}>
-          Sensor ID
+          Machine Type
         </Typography>
       ),
     },
@@ -166,8 +166,8 @@ const MonitoringPointsTable = ({
         disableColumnMenu
         disableColumnSelector
         disableRowSelectionOnClick
-        pageSizeOptions={[10]}
-        paginationModel={{ page: page - 1, pageSize: 10 }}
+        pageSizeOptions={[5]}
+        paginationModel={{ page: page - 1, pageSize: 5 }}
         onPaginationModelChange={(model) => onPaginationChange(model.page + 1)}
         sx={{
           border: 'none',

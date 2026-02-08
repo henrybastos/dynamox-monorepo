@@ -8,6 +8,10 @@ export class RedisSubscriberService implements OnModuleInit, OnModuleDestroy {
 
   constructor(private readonly telemetryGateway: TelemetryGateway) {
     this.redisClient = new Redis(process.env['REDIS_URL'] || 'redis://localhost:6379');
+    
+    this.redisClient.on('error', (err) => {
+      console.warn('Redis Subscriber connection error:', err.message);
+    });
   }
 
   onModuleInit() {

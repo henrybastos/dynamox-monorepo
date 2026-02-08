@@ -39,6 +39,12 @@ const sitemap: MenuItem[] = [
     path: paths.monitoringPoints,
     icon: 'tabler:current-location',
   },
+  {
+    id: 4,
+    subheader: 'Telemetry',
+    path: paths.telemetry,
+    icon: 'tabler:database',
+  },
 ];
 
 export default sitemap;

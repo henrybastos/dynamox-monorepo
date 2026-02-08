@@ -80,3 +80,11 @@ Content-Type: application/json
   "id": "sensor_bad",
   "model": "TcAg"
 }
+
+### 10. List All Telemetry
+GET {{baseUrl}}/telemetry?page=1&limit=10
+Authorization: Bearer {{token}}
+
+### 11. Delete Telemetry
+DELETE {{baseUrl}}/telemetry/1
+Authorization: Bearer {{token}}
