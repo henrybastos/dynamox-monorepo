@@ -41,12 +41,6 @@ const SignInView = () => {
     resolver: zodResolver(signInSchema),
   });
 
-  useEffect(() => {
-    if (status === 'authenticated') {
-      navigate('/');
-    }
-  }, [status, navigate]);
-
   const onSubmit = async (data: SignInFormData) => {
     setError(null);
 

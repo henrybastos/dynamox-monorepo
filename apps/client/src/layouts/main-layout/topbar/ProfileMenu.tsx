@@ -21,32 +21,22 @@ const menuItems: MenuItems[] = [
   {
     id: 1,
     title: 'View Profile',
-    icon: 'material-symbols:account-circle-outline',
+    icon: 'tabler:user-circle',
   },
   {
     id: 2,
-    title: 'Account Settings',
-    icon: 'material-symbols:settings-account-box-outline-rounded',
+    title: 'Notifications',
+    icon: 'tabler:bell',
   },
   {
     id: 3,
-    title: 'Notifications',
-    icon: 'ic:outline-notifications-none',
+    title: 'GitHub Repo',
+    icon: 'tabler:brand-github',
   },
   {
     id: 4,
-    title: 'Switch Account',
-    icon: 'material-symbols:switch-account-outline',
-  },
-  {
-    id: 5,
-    title: 'Help Center',
-    icon: 'material-symbols:help-outline',
-  },
-  {
-    id: 6,
     title: 'Logout',
-    icon: 'material-symbols:logout',
+    icon: 'tabler:logout',
   },
 ];
 
@@ -123,7 +113,14 @@ const ProfileMenu = () => {
             return (
               <MenuItem
                 key={item.id}
-                onClick={item.title === 'Logout' ? handleLogout : handleProfileMenuClose}
+                onClick={() => {
+                  if (item.title === 'Logout') {
+                    handleLogout();
+                  } else if (item.title === 'View Profile') {
+                    console.log('Current Session:', session);
+                  }
+                  handleProfileMenuClose();
+                }}
                 sx={{ py: 1 }}
               >
                 <ListItemIcon sx={{ mr: 1, color: 'text.secondary', fontSize: 'h5.fontSize' }}>

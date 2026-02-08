@@ -32,9 +32,9 @@ export const authOptions: NextAuthOptions = {
         }
 
         const accessToken = jwt.sign(
-          { email: user.email, sub: user.id },
+          { email: user.email, sub: user.id.toString() },
           process.env.JWT_SECRET || 'supersercretkeyforlocaldev',
-          { expiresIn: '1d' }
+          { expiresIn: '30d' }
         );
 
         return {

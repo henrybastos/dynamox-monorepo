@@ -12,7 +12,8 @@ Content-Type: application/json
 
 ###
 
-@token = {{login.response.body.access_token}}
+# @token = {{login.response.body.access_token}}
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGR5bmFtb3guY29tIiwic3ViIjoiMiIsImlhdCI6MTc3MDU2NTkxOCwiZXhwIjoxNzczMTU3OTE4fQ.kU7rqX8J-jc0JLWNRi_2gWXmTFUzPK-uB0fDVA7F7tA
 
 ### 2. List Machines
 GET {{baseUrl}}/machines
