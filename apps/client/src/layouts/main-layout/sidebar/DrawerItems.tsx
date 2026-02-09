@@ -11,6 +11,7 @@ import CollapseListItem from './list-items/CollapseListItem';
 import Image from 'components/base/Image';
 import SidebarCard from './SidebarCard';
 import sitemap from 'routes/sitemap';
+import { Container } from '@mui/material';
 
 const DrawerItems = () => {
   const location = useLocation();
@@ -30,7 +31,9 @@ const DrawerItems = () => {
         zIndex={1000}
       >
         <ButtonBase component={Link} href="/" disableRipple>
-          <Image src={'/images/dynamox-wordmark.webp'} alt="logo" sx={{ mr: 1.75, width: '100%', maxHeight: '48px' }} />
+          <Container>
+            <Image src={'/images/dynamox-wordmark.webp'} alt="logo" sx={{ width: '100%', maxHeight: '56px', objectFit: 'contain' }} />
+          </Container>
         </ButtonBase>
       </Stack>
 

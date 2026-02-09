@@ -8,6 +8,16 @@ const IconButton: Components<Omit<Theme, 'components'>>['MuiIconButton'] = {
       backgroundColor: theme.palette.neutral.darker,
       marginLeft: 0,
     }),
+    colorError: ({ theme }) => ({
+      backgroundColor: theme.palette.error.main,
+      color: theme.palette.neutral.lightest,
+      '&:hover': {
+        backgroundColor: theme.palette.error.dark,
+      },
+      '&:active': {
+        backgroundColor: theme.palette.error.darker,
+      },
+    }),
     sizeLarge: ({ theme }) => ({
       padding: theme.spacing(1),
       fontSize: theme.typography.h3.fontSize,

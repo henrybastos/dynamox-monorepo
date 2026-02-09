@@ -19,13 +19,30 @@ export class TelemetryService {
     });
   }
 
-  async findAll(page = 1, limit = 10) {
+  async findAll(page = 1, limit = 10, sortField?: string, sortOrder: 'asc' | 'desc' = 'desc') {
     const skip = (page - 1) * limit;
+
+    let orderBy: any = { timestamp: 'desc' };
+
+    if (sortField) {
+      if (sortField === 'sensorName') {
+        orderBy = {
+          sensor: {
+            monitoringPoint: {
+              name: sortOrder,
+            },
+          },
+        };
+      } else {
+        orderBy = { [sortField]: sortOrder };
+      }
+    }
+
     const [items, total] = await Promise.all([
       prisma.telemetry.findMany({
         skip,
         take: limit,
-        orderBy: { timestamp: 'desc' },
+        orderBy,
         include: {
           sensor: {
             include: {
@@ -43,6 +60,14 @@ export class TelemetryService {
   async deleteOne(id: number) {
     return prisma.telemetry.delete({
       where: { id },
+    });
+  }
+
+  async deleteMany(ids: number[]) {
+    return prisma.telemetry.deleteMany({
+      where: {
+        id: { in: ids },
+      },
     });
   }
 }

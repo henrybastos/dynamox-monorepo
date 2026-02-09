@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridSortModel } from '@mui/x-data-grid';
 import { Typography, Box, IconButton, Tooltip } from '@mui/material';
 import { TelemetryRegistry } from 'store/slices/telemetrySlice';
 import IconifyIcon from 'components/base/IconifyIcon';
@@ -11,6 +11,10 @@ interface TelemetryTableProps {
   onPaginationChange: (page: number) => void;
   onDelete: (id: number) => void;
   page: number;
+  sortModel: GridSortModel;
+  onSortModelChange: (model: GridSortModel) => void;
+  selectionModel: any[];
+  onSelectionModelChange: (newSelectionModel: any[]) => void;
 }
 
 const TelemetryTable = ({
@@ -19,7 +23,11 @@ const TelemetryTable = ({
   total,
   onPaginationChange,
   onDelete,
-  page
+  page,
+  sortModel,
+  onSortModelChange,
+  selectionModel,
+  onSelectionModelChange
 }: TelemetryTableProps) => {
 
   const columns: GridColDef<TelemetryRegistry>[] = useMemo(() => [
@@ -179,10 +187,22 @@ const TelemetryTable = ({
         disableColumnResize
         disableColumnMenu
         disableColumnSelector
+        onPaginationModelChange={(model) => onPaginationChange(model.page + 1)}
+        sortingMode="server"
+        sortModel={sortModel}
+        onSortModelChange={onSortModelChange}
+        rowSelectionModel={selectionModel}
+        onRowSelectionModelChange={(newSelectionModel) => onSelectionModelChange(newSelectionModel as any[])}
+        checkboxSelection
         disableRowSelectionOnClick
         pageSizeOptions={[10]}
         paginationModel={{ page: page - 1, pageSize: 10 }}
-        onPaginationModelChange={(model) => onPaginationChange(model.page + 1)}
+        slotProps={{
+          pagination: {
+            showFirstButton: true,
+            showLastButton: true,
+          },
+        }}
         sx={{
           border: 'none',
           '& .MuiDataGrid-columnHeader': {

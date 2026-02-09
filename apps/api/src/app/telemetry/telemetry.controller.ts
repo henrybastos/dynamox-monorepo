@@ -13,11 +13,15 @@ export class TelemetryController {
   @Get()
   async findAll(
     @Query('page') page?: string,
-    @Query('limit') limit?: string
+    @Query('limit') limit?: string,
+    @Query('sortField') sortField?: string,
+    @Query('sortOrder') sortOrder?: 'asc' | 'desc'
   ) {
     return this.telemetryService.findAll(
       page ? parseInt(page) : 1,
-      limit ? parseInt(limit) : 10
+      limit ? parseInt(limit) : 10,
+      sortField,
+      sortOrder
     );
   }
 
@@ -31,8 +35,13 @@ export class TelemetryController {
     return this.telemetryService.getHistoryBySensor(sensorId);
   }
 
-  @Delete(':id')
-  async deleteOne(@Param('id', ParseIntPipe) id: number) {
-    return this.telemetryService.deleteOne(id);
+  @Delete()
+  async delete(@Query('ids') ids?: string) {
+    if (!ids) return;
+    const idArray = ids.split(',').map((id) => parseInt(id, 10));
+    if (idArray.length === 1) {
+      return this.telemetryService.deleteOne(idArray[0]);
+    }
+    return this.telemetryService.deleteMany(idArray);
   }
 }

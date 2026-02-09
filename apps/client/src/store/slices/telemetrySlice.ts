@@ -31,19 +31,39 @@ const initialState: TelemetryState = {
 
 export const fetchTelemetry = createAsyncThunk(
   'telemetry/fetchAll',
-  async ({ page, limit = 10 }: { page: number; limit?: number }) => {
+  async ({ 
+    page, 
+    limit = 10, 
+    sortField, 
+    sortOrder 
+  }: { 
+    page: number; 
+    limit?: number; 
+    sortField?: string; 
+    sortOrder?: 'asc' | 'desc' | null 
+  }) => {
     const response = await api.get('/telemetry', {
-      params: { page, limit },
+      params: { 
+        page, 
+        limit,
+        sortField,
+        sortOrder: sortOrder || undefined
+      },
     });
+    console.log('Data:', response.data);
+    
     return response.data;
   }
 );
 
 export const deleteTelemetry = createAsyncThunk(
   'telemetry/delete',
-  async (id: number) => {
-    await api.delete(`/telemetry/${id}`);
-    return id;
+  async (ids: number | number[]) => {
+    const idsString = Array.isArray(ids) ? ids.join(',') : ids.toString();
+    await api.delete(`/telemetry`, {
+      params: { ids: idsString }
+    });
+    return ids;
   }
 );
 
@@ -66,8 +86,9 @@ const telemetrySlice = createSlice({
         state.error = action.error.message || 'Failed to fetch telemetry';
       })
       .addCase(deleteTelemetry.fulfilled, (state, action) => {
-        state.items = state.items.filter((item) => item.id !== action.payload);
-        state.total -= 1;
+        const deletedIds = Array.isArray(action.payload) ? action.payload : [action.payload];
+        state.items = state.items.filter((item) => !deletedIds.includes(item.id));
+        state.total -= deletedIds.length;
       });
   },
 });
